@@ -27,24 +27,29 @@ public class PlayerController : MonoBehaviour
         controls.Player.Move.canceled -= ctx => { direction = 0f; };
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleMovementInput();
     }
 
     private void HandleMovementInput()
     {
-        t += direction * movementSpeed * Time.deltaTime;
+        t += direction * movementSpeed * Time.fixedDeltaTime;
 
         // Asegúrese de que t esté en el rango [0, 1]
         t = Mathf.Clamp01(t);
 
-        Vector3 newPosition = bezierCurve.GetPoint(bezierCurve.startPoint.position,
-                                                    bezierCurve.controlPoint1.position,
-                                                    bezierCurve.controlPoint2.position,
-                                                    bezierCurve.endPoint.position,
-                                                    t);
-
+        Vector3 newPosition = bezierCurve.GetPoint(t);
         transform.position = newPosition;
+
+        // Si t está cerca del final de la curva, no calculamos la dirección y rotación
+        if (t < 1f)
+        {
+            // Calcular la dirección y rotación basada en la tangente en el punto actual
+            Vector3 tangent = bezierCurve.GetTangent(t);
+            float angle = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = targetRotation;
+        }
     }
 }
