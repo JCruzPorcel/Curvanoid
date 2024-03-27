@@ -2,33 +2,69 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    public bool IsMoving { get; set; } = true;
+    public float speed = 5f; // Velocidad inicial de la bola
+    public float maxSpeed = 10f; // Velocidad máxima permitida
+    public float minSpeed = 2f; // Velocidad mínima permitida
+    public float speedIncreaseAmount = 2f; // Cantidad de aumento de velocidad al golpear al jugador
+    public float speedIncreaseDuration = 2f; // Duración del aumento de velocidad en segundos
+    public float speedDecreaseRate = 0.5f; // Tasa de disminución de velocidad por segundo
+    public float downwardForce = 2f; // Fuerza hacia abajo para evitar que la bola quede atrapada
 
     private Rigidbody2D rb;
+    private float currentSpeed;
+    private bool speedIncreased = false;
+    private float speedIncreaseTimer = 0f;
 
-    private void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartMoving();
+        currentSpeed = speed;
+        // Asignar velocidad inicial a la bola
+        rb.velocity = Vector2.up.normalized * currentSpeed;
     }
 
-    public void StartMoving()
+    void FixedUpdate()
     {
-        // Generar una dirección aleatoria para el movimiento inicial
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
+        // Disminuir gradualmente la velocidad con el tiempo hasta alcanzar el mínimo
+        currentSpeed = Mathf.Max(minSpeed, currentSpeed - speedDecreaseRate * Time.fixedDeltaTime);
 
-        // Aplicar velocidad inicial a la bola
-        rb.velocity = randomDirection * speed;
+        // Aplicar fuerza hacia abajo para evitar que la bola quede atrapada en un bucle
+        if (transform.position.y > 3.5f)
+        {
+            rb.AddForce(Vector2.down * downwardForce, ForceMode2D.Force);
+        }
+
+        // Controlar el aumento temporal de velocidad
+        if (speedIncreased)
+        {
+            speedIncreaseTimer += Time.fixedDeltaTime;
+            if (speedIncreaseTimer >= speedIncreaseDuration)
+            {
+                // Restaurar la velocidad original si se ha alcanzado el tiempo máximo de aumento
+                currentSpeed = speed;
+                speedIncreased = false;
+                speedIncreaseTimer = 0f;
+            }
+        }
+
+        // Aplicar la velocidad actualizada
+        rb.velocity = rb.velocity.normalized * currentSpeed;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        // Si la bola colisiona con otro objeto, rebota
-        if (!IsMoving) return;
-
-        Vector3 normal = collision.contacts[0].normal;
-        Vector3 reflection = Vector3.Reflect(rb.velocity, normal);
-        rb.velocity = reflection.normalized * speed;
+        // Si la bola golpea al jugador, aumentar temporalmente la velocidad
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // Calcular la dirección del vector entre el punto de contacto y el centro de la bola
+            Vector2 hitDirection = (other.contacts[0].point - (Vector2)transform.position).normalized;
+            // Aplicar la nueva velocidad en la dirección del golpe del jugador
+            rb.velocity = hitDirection * currentSpeed;
+            // Aumentar temporalmente la velocidad
+            currentSpeed += speedIncreaseAmount;
+            // Limitar la velocidad máxima
+            currentSpeed = Mathf.Min(maxSpeed, currentSpeed);
+            speedIncreased = true;
+        }
     }
 }
