@@ -2,69 +2,64 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float speed = 5f; // Velocidad inicial de la bola
-    public float maxSpeed = 10f; // Velocidad máxima permitida
-    public float minSpeed = 2f; // Velocidad mínima permitida
-    public float speedIncreaseAmount = 2f; // Cantidad de aumento de velocidad al golpear al jugador
-    public float speedIncreaseDuration = 2f; // Duración del aumento de velocidad en segundos
-    public float speedDecreaseRate = 0.5f; // Tasa de disminución de velocidad por segundo
-    public float downwardForce = 2f; // Fuerza hacia abajo para evitar que la bola quede atrapada
-
+    [SerializeField] private float initialSpeed = 10f; // Velocidad inicial de la bola
+    [SerializeField] private float maxBurstSpeed = 20f; // Velocidad máxima durante el burst
+    [SerializeField] private float burstDuration = 0.5f; // Duración del burst en segundos
+    [SerializeField] private float decelerationRate = 5f; // Tasa de disminución de velocidad
     private Rigidbody2D rb;
-    private float currentSpeed;
-    private bool speedIncreased = false;
-    private float speedIncreaseTimer = 0f;
+    private bool isMoving = false;
+    private float burstEndTime = 0f;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentSpeed = speed;
-        // Asignar velocidad inicial a la bola
-        rb.velocity = Vector2.up.normalized * currentSpeed;
     }
 
-    void FixedUpdate()
+    public void StartMoving()
     {
-        // Disminuir gradualmente la velocidad con el tiempo hasta alcanzar el mínimo
-        currentSpeed = Mathf.Max(minSpeed, currentSpeed - speedDecreaseRate * Time.fixedDeltaTime);
-
-        // Aplicar fuerza hacia abajo para evitar que la bola quede atrapada en un bucle
-        if (transform.position.y > 3.5f)
+        if (!isMoving)
         {
-            rb.AddForce(Vector2.down * downwardForce, ForceMode2D.Force);
+            transform.parent = null;
+            rb.velocity = transform.up * initialSpeed; // Establecer la velocidad inicial en la dirección actual
+            isMoving = true;
         }
+    }
 
-        // Controlar el aumento temporal de velocidad
-        if (speedIncreased)
+    public void NewDirection(float angleInRadians)
+    {
+        transform.parent = null;
+        Vector2 direction = Quaternion.Euler(0f, 0f, angleInRadians) * Vector2.up;
+        rb.velocity = direction.normalized * initialSpeed; // Aplicar la nueva dirección
+        isMoving = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isMoving)
         {
-            speedIncreaseTimer += Time.fixedDeltaTime;
-            if (speedIncreaseTimer >= speedIncreaseDuration)
+            // Si estamos dentro del período de burst
+            if (Time.time < burstEndTime)
             {
-                // Restaurar la velocidad original si se ha alcanzado el tiempo máximo de aumento
-                currentSpeed = speed;
-                speedIncreased = false;
-                speedIncreaseTimer = 0f;
+                // Aumentar temporalmente la velocidad hasta el máximo
+                rb.velocity = rb.velocity.normalized * Mathf.Min(rb.velocity.magnitude + maxBurstSpeed * Time.fixedDeltaTime / burstDuration, maxBurstSpeed);
+            }
+            else
+            {
+                // Disminuir gradualmente la velocidad, asegurándote de que no baje del mínimo
+                rb.velocity = rb.velocity.normalized * Mathf.Max(rb.velocity.magnitude - decelerationRate * Time.fixedDeltaTime, initialSpeed);
             }
         }
-
-        // Aplicar la velocidad actualizada
-        rb.velocity = rb.velocity.normalized * currentSpeed;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Si la bola golpea al jugador, aumentar temporalmente la velocidad
-        if (other.gameObject.CompareTag("Player"))
+        // Si la bola golpea al jugador, activa el burst de velocidad
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Calcular la dirección del vector entre el punto de contacto y el centro de la bola
-            Vector2 hitDirection = (other.contacts[0].point - (Vector2)transform.position).normalized;
-            // Aplicar la nueva velocidad en la dirección del golpe del jugador
-            rb.velocity = hitDirection * currentSpeed;
-            // Aumentar temporalmente la velocidad
-            currentSpeed += speedIncreaseAmount;
-            // Limitar la velocidad máxima
-            currentSpeed = Mathf.Min(maxSpeed, currentSpeed);
-            speedIncreased = true;
+            burstEndTime = Time.time + burstDuration;
+        }else if (collision.gameObject.CompareTag("Brick"))
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 }
