@@ -10,26 +10,33 @@ public class GameManager : MonoBehaviour
         Options,
         GameOver
     }
+    [SerializeField] private GameState currentGameState = GameState.MainMenu;
 
     public delegate void GameStateChangedHandler(GameState newState);
     public static event GameStateChangedHandler OnGameStateChanged;
 
+    [SerializeField] private GameObject persistentObject;
     public static GameManager Instance { get; private set; }
-
-    [SerializeField] private GameState currentGameState = GameState.MainMenu;
+    public GameControls Controls { get; private set; }
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(persistentObject);
         }
         else
         {
             Destroy(gameObject);
             return;
         }
+    }
+
+    private void Start()
+    {
+        currentGameState = GameState.MainMenu;
+        Controls = new GameControls();
     }
 
     public void SetGameState(GameState newGameState)
@@ -45,21 +52,25 @@ public class GameManager : MonoBehaviour
     public void MainMenuState()
     {
         SetGameState(GameState.MainMenu);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void InGameState()
     {
         SetGameState(GameState.InGame);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void GameOverState()
     {
         SetGameState(GameState.GameOver);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OptionsState()
     {
         SetGameState(GameState.Options);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void QuitGame()
@@ -75,4 +86,11 @@ public class GameManager : MonoBehaviour
     {
         return currentGameState == gameState;
     }
+
+    // Si se requiere implementar logica adicional, reemplazar los Gettters y Setters de Controls por esta funcion.
+    /*public GameControls GetGameControls()
+    {
+        return controls;
+    }*/
 }
+

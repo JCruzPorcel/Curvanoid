@@ -8,21 +8,16 @@ public class PlayerController : MonoBehaviour
     private GameControls controls;
     private bool canMove = false;
 
-    public GameControls Controls { get { return controls; } private set => controls = value; }
     private float direction;
 
     private BallController ballController;
 
     private void Awake()
     {
-        controls = new GameControls();
-        bezierCurve = FindObjectOfType<BezierCurve>();
-        ballController = GetComponentInChildren<BallController>();
-    }
+        controls = GameManager.Instance.Controls;
 
-    private void Start()
-    {
-        transform.position = bezierCurve.GetPoint(t);
+        bezierCurve = GetComponent<BezierCurve>();
+        ballController = GetComponentInChildren<BallController>();
     }
 
     private void OnEnable()
@@ -69,8 +64,6 @@ public class PlayerController : MonoBehaviour
 
     private void StartGame()
     {
-        /*float playerRotation = transform.eulerAngles.y;
-        float angleInRadians = Mathf.Deg2Rad * (90f - playerRotation); // Ajuste del ángulo para que sea en el plano XY*/
         ballController?.StartMoving();
         canMove = true;
     }

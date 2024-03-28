@@ -10,10 +10,10 @@ public class BezierCurve : MonoBehaviour
     [Tooltip("Margen en el eje Y para la Curva de Bezier")]
     private float additionalYMargin = 5f; // Margen adicional en Y
 
-    [SerializeField] private Vector3 startPoint;
-    [SerializeField] private Vector3 endPoint;
-    [SerializeField] private Vector3 controlPoint1;
-    [SerializeField] private Vector3 controlPoint2;
+    private Vector3 startPoint;
+    private Vector3 endPoint;
+    private Vector3 controlPoint1;
+    private Vector3 controlPoint2;
     private int segmentsNumber = 20;
 
     private void Start()
