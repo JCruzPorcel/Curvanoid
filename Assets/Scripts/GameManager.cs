@@ -3,6 +3,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
+    #region Enums
     public enum GameState
     {
         MainMenu,
@@ -10,15 +11,21 @@ public class GameManager : MonoBehaviour
         Options,
         GameOver
     }
+    #endregion
+
+    #region Variables
     [SerializeField] private GameState currentGameState = GameState.MainMenu;
-
-    public delegate void GameStateChangedHandler(GameState newState);
-    public static event GameStateChangedHandler OnGameStateChanged;
-
     [SerializeField] private GameObject persistentObject;
     public static GameManager Instance { get; private set; }
     public GameControls Controls { get; private set; }
+    #endregion
 
+    #region Events
+    public delegate void GameStateChangedHandler(GameState newState);
+    public static event GameStateChangedHandler OnGameStateChanged;
+    #endregion
+
+    #region MonoBehaviour Callbacks
     private void Awake()
     {
         if (Instance == null)
@@ -38,7 +45,9 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.MainMenu;
         Controls = new GameControls();
     }
+    #endregion
 
+    #region Game State Methods
     public void SetGameState(GameState newGameState)
     {
         if (currentGameState != newGameState)
@@ -77,11 +86,11 @@ public class GameManager : MonoBehaviour
     {
         return currentGameState == gameState;
     }
+    #endregion
 
-    // Si se requiere implementar logica adicional, reemplazar los Gettters y Setters de Controls por esta funcion.
+    // Si se requiere implementar lógica adicional, reemplazar los Getters y Setters de Controls por esta función.
     /*public GameControls GetGameControls()
     {
         return controls;
     }*/
 }
-

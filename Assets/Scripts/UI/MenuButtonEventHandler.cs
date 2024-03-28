@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuButtonEventHandler : MonoBehaviour
@@ -37,5 +35,5 @@ public class MenuButtonEventHandler : MonoBehaviour
     public void OnQuitGameButtonClick()
     {
         MenuManager.Instance.QuitGame();
-    }    
+    }
 }

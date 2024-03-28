@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     private static MenuManager instance;
 
+    #region Singleton
     public static MenuManager Instance
     {
         get
@@ -24,7 +25,9 @@ public class MenuManager : MonoBehaviour
             return instance;
         }
     }
+    #endregion
 
+    #region Variables
     private bool isPaused = false;
     private int currentLevel = 0;
 
@@ -36,32 +39,19 @@ public class MenuManager : MonoBehaviour
     private GameObject settingsInstance;
 
     private GameControls controls;
+    #endregion
 
+    #region MonoBehaviour Callbacks
     private void Awake()
     {
-        // Verificar si ya hay una instancia del menú en la escena
-        if (menuPrefab != null && GameObject.Find(menuPrefab.name) == null)
-        {
-            CreateMenuInstance();
-        }
-
-        if (scoreboardPrefab != null && GameObject.Find(scoreboardPrefab.name) == null)
-        {
-            CreateScoreboardInstance();
-        }
-
-        if (settingsPrefab != null && GameObject.Find(settingsPrefab.name) == null)
-        {
-            CreateSettingsInstance();
-        }
+        CreateMenuInstanceIfNotFound(menuPrefab, menuPrefab.name, ref menuInstance);
+        CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
+        CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);       
     }
 
     private void Start()
     {
-        // Obtener las instancias de los controles del GameManager
         controls = GameManager.Instance.Controls;
-
-        // Habilitar los controles y asignar el evento de pausa
         controls.Enable();
         controls.Player.Pause.performed += ctx =>
         {
@@ -71,57 +61,37 @@ public class MenuManager : MonoBehaviour
             }
         };
     }
+    #endregion
 
-    private void CreateMenuInstance()
+    #region Menu Creation
+    private void CreateMenuInstanceIfNotFound(GameObject prefab, string canvasName, ref GameObject instanceRef)
     {
-        // Verificar si hay un Canvas en la escena
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
+        if (prefab != null && GameObject.Find(prefab.name) == null)
         {
-            // Si no hay Canvas, crea uno
-            GameObject canvasGO = new GameObject("MenuOptions_Canvas");
-            canvas = canvasGO.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGO.AddComponent<CanvasScaler>();
-            canvasGO.AddComponent<GraphicRaycaster>();
+            Canvas canvas = FindObjectOfType<Canvas>();
+            if (canvas == null)
+            {
+                GameObject canvasGO = new GameObject(canvasName);
+                canvas = canvasGO.AddComponent<Canvas>();
+                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                canvasGO.AddComponent<CanvasScaler>();
+                canvasGO.AddComponent<GraphicRaycaster>();
+            }
+
+            instanceRef = Instantiate(prefab, canvas.transform);
+            instanceRef.SetActive(false);
         }
-
-        // Instanciar el menú dentro del Canvas
-        menuInstance = Instantiate(menuPrefab, canvas.transform);
-        menuInstance.SetActive(isPaused);
     }
+    #endregion
 
-    private void CreateScoreboardInstance()
-    {
-        // Verificar si hay un Canvas en la escena
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
-        {
-            // Si no hay Canvas, crea uno
-            GameObject canvasGO = new GameObject("Scoreboard_Canvas");
-            canvas = canvasGO.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGO.AddComponent<CanvasScaler>();
-            canvasGO.AddComponent<GraphicRaycaster>();
-        }
-
-        // Instanciar el scoreboard dentro del Canvas
-        scoreboardInstance = Instantiate(scoreboardPrefab, canvas.transform);
-        scoreboardInstance.SetActive(false); // El scoreboard no se mostrará al principio
-    }
-
+    #region Menu Interactions
     private void TogglePause()
     {
         isPaused = !isPaused;
-
         if (isPaused)
-        {
             GameManager.Instance.OptionsState();
-        }
         else
-        {
             GameManager.Instance.InGameState();
-        }
     }
 
     public void PauseMenu()
@@ -133,13 +103,13 @@ public class MenuManager : MonoBehaviour
     private void UpdateMenuInstance()
     {
         if (menuInstance == null)
-        {
-            CreateMenuInstance();
-        }
+            CreateMenuInstanceIfNotFound(menuPrefab, menuPrefab.name, ref menuInstance);
 
-        menuInstance?.SetActive(isPaused);
-        scoreboardInstance?.SetActive(false);
+        if (instance != null)
+            menuInstance.SetActive(isPaused);
+
         settingsInstance?.SetActive(false);
+        scoreboardInstance?.SetActive(false);
     }
 
     public void RestartLevel()
@@ -158,14 +128,13 @@ public class MenuManager : MonoBehaviour
     public void Scoreboard()
     {
         if (scoreboardInstance == null)
-        {
-            CreateScoreboardInstance();
-        }
+            CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
 
-        // Mostrar el scoreboard y ocultar el menú y el menú de configuración
-        scoreboardInstance?.SetActive(true);
-        menuInstance?.SetActive(false);
+        if (instance != null)
+            scoreboardInstance.SetActive(true);
+
         settingsInstance?.SetActive(false);
+        menuInstance.SetActive(false);
 
         GameManager.Instance.OptionsState();
     }
@@ -173,11 +142,8 @@ public class MenuManager : MonoBehaviour
     public void MainMenu()
     {
         string sceneName = "MainMenu";
-
-        DeactivateMenu();
-
+        DesactivateMenu();
         SwitchToScene(sceneName);
-
         GameManager.Instance.MainMenuState();
     }
 
@@ -186,13 +152,10 @@ public class MenuManager : MonoBehaviour
         currentLevel = newLevel;
     }
 
-    private void DeactivateMenu()
-    {
-        if (menuInstance != null)
-        {
-            menuInstance.SetActive(false);
-            isPaused = false;
-        }
+    private void DesactivateMenu()
+    {        
+        menuInstance?.SetActive(false);
+        isPaused = false;
     }
 
     public void SwitchToScene(string sceneName)
@@ -208,40 +171,20 @@ public class MenuManager : MonoBehaviour
     public void Settings()
     {
         if (settingsInstance == null)
-        {
-            CreateSettingsInstance();
-        }
+            CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);
 
-        // Mostrar el menú de configuración y ocultar el menú y el scoreboard
-        settingsInstance?.SetActive(true);
-        menuInstance?.SetActive(false);
+        if (settingsInstance != null)
+            settingsInstance.SetActive(true);
+
         scoreboardInstance?.SetActive(false);
+        menuInstance.SetActive(false);
 
         GameManager.Instance.OptionsState();
-    }
-    private void CreateSettingsInstance()
-    {
-        // Verificar si hay un Canvas en la escena
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
-        {
-            // Si no hay Canvas, crea uno
-            GameObject canvasGO = new GameObject("Settings_Canvas");
-            canvas = canvasGO.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGO.AddComponent<CanvasScaler>();
-            canvasGO.AddComponent<GraphicRaycaster>();
-        }
-
-        // Instanciar el menú de configuración dentro del Canvas
-        settingsInstance = Instantiate(settingsPrefab, canvas.transform);
-        settingsInstance.SetActive(false); // El menú de configuración no se mostrará al principio
     }
 
     public void BackToMenu()
     {
-        // Ocultar todos los menús
-        menuInstance?.SetActive(false);
+        DesactivateMenu();
         scoreboardInstance?.SetActive(false);
         settingsInstance?.SetActive(false);
     }
@@ -254,4 +197,5 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+    #endregion
 }
