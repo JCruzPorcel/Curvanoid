@@ -29,7 +29,12 @@ public class MenuManager : MonoBehaviour
     private int currentLevel = 0;
 
     [SerializeField] private GameObject menuPrefab;
+    [SerializeField] private GameObject scoreboardPrefab;
+    [SerializeField] private GameObject settingsPrefab;
     private GameObject menuInstance;
+    private GameObject scoreboardInstance;
+    private GameObject settingsInstance;
+
     private GameControls controls;
 
     private void Awake()
@@ -38,6 +43,16 @@ public class MenuManager : MonoBehaviour
         if (menuPrefab != null && GameObject.Find(menuPrefab.name) == null)
         {
             CreateMenuInstance();
+        }
+
+        if (scoreboardPrefab != null && GameObject.Find(scoreboardPrefab.name) == null)
+        {
+            CreateScoreboardInstance();
+        }
+
+        if (settingsPrefab != null && GameObject.Find(settingsPrefab.name) == null)
+        {
+            CreateSettingsInstance();
         }
     }
 
@@ -76,6 +91,25 @@ public class MenuManager : MonoBehaviour
         menuInstance.SetActive(isPaused);
     }
 
+    private void CreateScoreboardInstance()
+    {
+        // Verificar si hay un Canvas en la escena
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            // Si no hay Canvas, crea uno
+            GameObject canvasGO = new GameObject("Scoreboard_Canvas");
+            canvas = canvasGO.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGO.AddComponent<CanvasScaler>();
+            canvasGO.AddComponent<GraphicRaycaster>();
+        }
+
+        // Instanciar el scoreboard dentro del Canvas
+        scoreboardInstance = Instantiate(scoreboardPrefab, canvas.transform);
+        scoreboardInstance.SetActive(false); // El scoreboard no se mostrará al principio
+    }
+
     private void TogglePause()
     {
         isPaused = !isPaused;
@@ -104,6 +138,8 @@ public class MenuManager : MonoBehaviour
         }
 
         menuInstance?.SetActive(isPaused);
+        scoreboardInstance?.SetActive(false);
+        settingsInstance?.SetActive(false);
     }
 
     public void RestartLevel()
@@ -121,6 +157,16 @@ public class MenuManager : MonoBehaviour
 
     public void Scoreboard()
     {
+        if (scoreboardInstance == null)
+        {
+            CreateScoreboardInstance();
+        }
+
+        // Mostrar el scoreboard y ocultar el menú y el menú de configuración
+        scoreboardInstance?.SetActive(true);
+        menuInstance?.SetActive(false);
+        settingsInstance?.SetActive(false);
+
         GameManager.Instance.OptionsState();
     }
 
@@ -134,6 +180,7 @@ public class MenuManager : MonoBehaviour
 
         GameManager.Instance.MainMenuState();
     }
+
     public void SetCurrentLevel(int newLevel)
     {
         currentLevel = newLevel;
@@ -160,7 +207,43 @@ public class MenuManager : MonoBehaviour
 
     public void Settings()
     {
+        if (settingsInstance == null)
+        {
+            CreateSettingsInstance();
+        }
 
+        // Mostrar el menú de configuración y ocultar el menú y el scoreboard
+        settingsInstance?.SetActive(true);
+        menuInstance?.SetActive(false);
+        scoreboardInstance?.SetActive(false);
+
+        GameManager.Instance.OptionsState();
+    }
+    private void CreateSettingsInstance()
+    {
+        // Verificar si hay un Canvas en la escena
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            // Si no hay Canvas, crea uno
+            GameObject canvasGO = new GameObject("Settings_Canvas");
+            canvas = canvasGO.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGO.AddComponent<CanvasScaler>();
+            canvasGO.AddComponent<GraphicRaycaster>();
+        }
+
+        // Instanciar el menú de configuración dentro del Canvas
+        settingsInstance = Instantiate(settingsPrefab, canvas.transform);
+        settingsInstance.SetActive(false); // El menú de configuración no se mostrará al principio
+    }
+
+    public void BackToMenu()
+    {
+        // Ocultar todos los menús
+        menuInstance?.SetActive(false);
+        scoreboardInstance?.SetActive(false);
+        settingsInstance?.SetActive(false);
     }
 
     public void QuitGame()
