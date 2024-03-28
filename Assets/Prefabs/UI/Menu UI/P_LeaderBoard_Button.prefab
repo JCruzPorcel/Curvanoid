@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915818693258578117, guid: dcee19eb1628f494d88d7712eb85df45, type: 3}
       propertyPath: m_Name
-      value: Leaderboarfd_Text
+      value: LeaderBoard_Text
       objectReference: {fileID: 0}
     - target: {fileID: 2173802694373921700, guid: dcee19eb1628f494d88d7712eb85df45, type: 3}
       propertyPath: m_Name
-      value: Scoreboard_Button Variant
+      value: P_LeaderBoard_Button
       objectReference: {fileID: 0}
     - target: {fileID: 2173802694373921700, guid: dcee19eb1628f494d88d7712eb85df45, type: 3}
       propertyPath: m_IsActive
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2443347047082061581, guid: dcee19eb1628f494d88d7712eb85df45, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -450
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 2443347047082061581, guid: dcee19eb1628f494d88d7712eb85df45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

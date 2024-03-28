@@ -28,4 +28,9 @@ public class MenuButtonEventHandler : MonoBehaviour
     {
         MenuManager.Instance.Settings();
     }
+
+    public void OnQuitGameButtonClick()
+    {
+        MenuManager.Instance.QuitGame();
+    }
 }
