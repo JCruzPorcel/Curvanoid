@@ -70,7 +70,12 @@ public class MenuManager : MonoBehaviour
     {
         if (prefab != null && GameObject.Find(prefab.name) == null)
         {
-            Canvas canvas = FindObjectOfType<Canvas>();
+            Canvas[] canvasArray = FindObjectsOfType<Canvas>();
+
+            // Buscar el primer Canvas que no sea un descendiente del objeto actual
+            Canvas canvas = Array.Find(canvasArray, c => c.gameObject != gameObject && !IsDescendantOf(c.gameObject, gameObject));
+
+            // Si no se encontró un canvas que no sea un descendiente, crear uno nuevo
             if (canvas == null)
             {
                 GameObject canvasGO = new GameObject(canvasName);
@@ -84,6 +89,18 @@ public class MenuManager : MonoBehaviour
             instanceRef.name = canvasName;
             instanceRef.SetActive(false);
         }
+    }
+
+    // Función auxiliar para verificar si un objeto es descendiente de otro
+    private bool IsDescendantOf(GameObject child, GameObject parent)
+    {
+        Transform t = child.transform.parent;
+        while (t != null)
+        {
+            if (t.gameObject == parent) return true;
+            t = t.parent;
+        }
+        return false;
     }
     #endregion
 
@@ -165,7 +182,15 @@ public class MenuManager : MonoBehaviour
 
     public void SwitchToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        try
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        catch (Exception ex)
+        {
+            SceneManager.LoadScene("MainMenu");
+            Debug.Log($"Error, no se pudo cargar la escena: {ex}");
+        }
     }
 
     private bool CanToggleMenu()

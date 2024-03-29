@@ -1,7 +1,12 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class MenuButtonEventHandler : MonoBehaviour
 {
+    private GameObject menuToActivate;
+    private GameObject menuToDeactivate;
+
     public void OnPauseButtonClick()
     {
         MenuManager.Instance.PauseMenu();
@@ -9,27 +14,48 @@ public class MenuButtonEventHandler : MonoBehaviour
 
     public void OnRestartLevelButtonClick()
     {
-        MenuManager.Instance.RestartLevel();
+        StartTransitionAndExecute(MenuManager.Instance.RestartLevel);
     }
 
     public void OnScoreboardButtonClick()
     {
-        MenuManager.Instance.Scoreboard();
+        if (IsInMainMenu())
+        {
+            StartTransitionAndExecute(MenuManager.Instance.Scoreboard);
+        }
+        else
+        {
+            MenuManager.Instance.Scoreboard();
+        }
     }
 
     public void OnMainMenuButtonClick()
     {
-        MenuManager.Instance.MainMenu();
+        StartTransitionAndExecute(MenuManager.Instance.MainMenu);
     }
 
     public void OnSettingsButtonClick()
     {
-        MenuManager.Instance.Settings();
+        if (IsInMainMenu())
+        {
+            StartTransitionAndExecute(MenuManager.Instance.Settings);
+        }
+        else
+        {
+            MenuManager.Instance.Settings();
+        }
     }
 
     public void OnBackToMenuButtonClick()
     {
-        MenuManager.Instance.BackToMenu();
+        if (IsInMainMenu())
+        {
+            StartTransitionAndExecute(MenuManager.Instance.BackToMenu);
+        }
+        else
+        {
+            MenuManager.Instance.BackToMenu();
+        }
     }
 
     public void OnQuitGameButtonClick()
@@ -39,12 +65,57 @@ public class MenuButtonEventHandler : MonoBehaviour
 
     public void OnSelectLevelButtonClick(int currentLevel)
     {
-        MenuManager.Instance.SetCurrentLevel(currentLevel);
-        MenuManager.Instance.SwitchToScene($"Level_{currentLevel}");
+        StartTransitionAndExecute(() =>
+        {
+            MenuManager.Instance.SetCurrentLevel(currentLevel);
+            MenuManager.Instance.SwitchToScene($"Level_{currentLevel}");
+        });
     }
 
     public void OnPlayButtonClick()
     {
-        MenuManager.Instance.GetMainMenu();
+        StartTransitionAndExecute(MenuManager.Instance.GetMainMenu);
+    }
+
+    public void SetMenuToActivate(GameObject newMenu)
+    {
+        menuToActivate = newMenu;
+    }
+
+    public void DeactivateCurrentMenu(GameObject currentMenu)
+    {
+        menuToDeactivate = currentMenu;
+    }
+
+    private bool IsInMainMenu()
+    {
+        return GameManager.Instance.IsCurrentState(GameManager.GameState.MainMenu);
+    }
+
+    private void StartTransitionAndExecute(Action action)
+    {
+        TransitionManager.Instance.StartTransition();
+        StartCoroutine(ExecuteWithDelay(action));
+    }
+
+    private IEnumerator ExecuteWithDelay(Action action)
+    {
+        float delayBeforeExecution = TransitionManager.Instance.transitionTime / 2;
+
+        yield return new WaitForSeconds(delayBeforeExecution);
+
+        if (menuToActivate != null)
+        {
+            menuToActivate.SetActive(true);
+            menuToActivate = null;
+        }
+
+        if (menuToDeactivate != null)
+        {
+            menuToDeactivate.SetActive(false);
+            menuToDeactivate = null;
+        }
+
+        action.Invoke();
     }
 }
