@@ -36,4 +36,15 @@ public class MenuButtonEventHandler : MonoBehaviour
     {
         MenuManager.Instance.QuitGame();
     }
+
+    public void OnSelectLevelButtonClick(int currentLevel)
+    {
+        MenuManager.Instance.SetCurrentLevel(currentLevel);
+        MenuManager.Instance.SwitchToScene($"Level_{currentLevel}");
+    }
+
+    public void OnPlayButtonClick()
+    {
+        MenuManager.Instance.GetMainMenu();
+    }
 }

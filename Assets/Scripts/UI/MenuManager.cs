@@ -31,12 +31,14 @@ public class MenuManager : MonoBehaviour
     private bool isPaused = false;
     private int currentLevel = 0;
 
-    [SerializeField] private GameObject menuPrefab;
+    [SerializeField] private GameObject pausePrefab;
     [SerializeField] private GameObject scoreboardPrefab;
     [SerializeField] private GameObject settingsPrefab;
-    private GameObject menuInstance;
+    [SerializeField] private GameObject mainMenuPrefab;
+    private GameObject pauseInstance;
     private GameObject scoreboardInstance;
     private GameObject settingsInstance;
+    private GameObject mainMenuInstance;
 
     private GameControls controls;
     #endregion
@@ -44,9 +46,9 @@ public class MenuManager : MonoBehaviour
     #region MonoBehaviour Callbacks
     private void Awake()
     {
-        CreateMenuInstanceIfNotFound(menuPrefab, menuPrefab.name, ref menuInstance);
+        CreateMenuInstanceIfNotFound(pausePrefab, pausePrefab.name, ref pauseInstance);
         CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
-        CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);       
+        CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);
     }
 
     private void Start()
@@ -79,6 +81,7 @@ public class MenuManager : MonoBehaviour
             }
 
             instanceRef = Instantiate(prefab, canvas.transform);
+            instanceRef.name = canvasName;
             instanceRef.SetActive(false);
         }
     }
@@ -102,11 +105,13 @@ public class MenuManager : MonoBehaviour
 
     private void UpdateMenuInstance()
     {
-        if (menuInstance == null)
-            CreateMenuInstanceIfNotFound(menuPrefab, menuPrefab.name, ref menuInstance);
+        GetMainMenu();
+
+        if (pauseInstance == null)
+            CreateMenuInstanceIfNotFound(pausePrefab, pausePrefab.name, ref pauseInstance);
 
         if (instance != null)
-            menuInstance.SetActive(isPaused);
+            pauseInstance.SetActive(isPaused);
 
         settingsInstance?.SetActive(false);
         scoreboardInstance?.SetActive(false);
@@ -127,6 +132,8 @@ public class MenuManager : MonoBehaviour
 
     public void Scoreboard()
     {
+        GetMainMenu();
+
         if (scoreboardInstance == null)
             CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
 
@@ -134,9 +141,7 @@ public class MenuManager : MonoBehaviour
             scoreboardInstance.SetActive(true);
 
         settingsInstance?.SetActive(false);
-        menuInstance.SetActive(false);
-
-        GameManager.Instance.OptionsState();
+        pauseInstance?.SetActive(false);
     }
 
     public void MainMenu()
@@ -153,8 +158,8 @@ public class MenuManager : MonoBehaviour
     }
 
     private void DesactivateMenu()
-    {        
-        menuInstance?.SetActive(false);
+    {
+        pauseInstance?.SetActive(false);
         isPaused = false;
     }
 
@@ -170,6 +175,8 @@ public class MenuManager : MonoBehaviour
 
     public void Settings()
     {
+        GetMainMenu();
+
         if (settingsInstance == null)
             CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);
 
@@ -177,16 +184,33 @@ public class MenuManager : MonoBehaviour
             settingsInstance.SetActive(true);
 
         scoreboardInstance?.SetActive(false);
-        menuInstance.SetActive(false);
+        pauseInstance?.SetActive(false);
+    }
 
-        GameManager.Instance.OptionsState();
+    public void GetMainMenu()
+    {
+        if (GameManager.Instance.IsCurrentState(GameManager.GameState.MainMenu))
+        {
+            if (mainMenuInstance == null)
+                mainMenuInstance = GameObject.Find(mainMenuPrefab.name);
+
+            if (mainMenuInstance != null)
+            {
+                mainMenuInstance.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning($"{mainMenuPrefab.name} not found!");
+            }
+        }
     }
 
     public void BackToMenu()
     {
-        DesactivateMenu();
-        scoreboardInstance?.SetActive(false);
-        settingsInstance?.SetActive(false);
+        if (GameManager.Instance.IsCurrentState(GameManager.GameState.MainMenu))
+        {
+            mainMenuInstance?.SetActive(true);
+        }
     }
 
     public void QuitGame()
