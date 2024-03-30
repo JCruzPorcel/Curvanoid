@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1423918896668509240}
   - component: {fileID: 8802726675634182976}
   - component: {fileID: 9100724567047970823}
+  - component: {fileID: -3070218956875305973}
   m_Layer: 3
   m_Name: S_Brick_0
   m_TagString: Brick
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6244022797637954839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 753da1fdb83c7d04db19c3ab82e3bbc5, type: 3}
   m_Name: 
@@ -176,3 +177,15 @@ MonoBehaviour:
   brickLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &-3070218956875305973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6244022797637954839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001ece3282fd8414f832c63d3d94d883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

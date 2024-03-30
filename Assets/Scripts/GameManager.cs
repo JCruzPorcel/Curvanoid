@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         MainMenu,
-        InGame,
         Options,
+        LevelCompleted,
+        InGame,
         GameOver
     }
     #endregion
@@ -38,12 +39,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
+    }                  
 
     private void Start()
     {
-        currentGameState = GameState.MainMenu;
         Controls = new GameControls();
+        currentGameState = GameState.MainMenu;
     }
     #endregion
 
@@ -61,6 +62,12 @@ public class GameManager : MonoBehaviour
     public void MainMenuState()
     {
         SetGameState(GameState.MainMenu);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void LevelCompletedState()
+    {
+        SetGameState(GameState.LevelCompleted);
         Cursor.lockState = CursorLockMode.None;
     }
 

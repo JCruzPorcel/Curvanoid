@@ -3,36 +3,41 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 5f;
-    private BezierCurve bezierCurve;
+    private float direction;
     private float t = 0.5f; // Inicia en el punto medio de la curva
-    private GameControls controls;
     private bool canMove = false;
 
-    private float direction;
-
-    private BallController ballController;
+    private BezierCurve bezierCurve;
+    private GameControls controls;
 
     private void Awake()
     {
+        bezierCurve = FindFirstObjectByType<BezierCurve>();
         controls = GameManager.Instance.Controls;
+    }
 
-        bezierCurve = GetComponent<BezierCurve>();
-        ballController = GetComponentInChildren<BallController>();
+    private void Start()
+    {
+        transform.position = bezierCurve.GetPoint(t);
     }
 
     private void OnEnable()
     {
         controls.Enable();
+
         controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
         controls.Player.Move.canceled += ctx => { direction = 0f; };
+
         controls.Player.Skill.performed += ctx => StartGame();
     }
 
     private void OnDisable()
     {
         controls.Disable();
+
         controls.Player.Move.canceled -= ctx => { direction = 0f; };
-        controls.Player.Skill.performed -= ctx => StartGame();
+
+        controls.Player.Skill.canceled -= ctx => StartGame();
     }
 
     private void FixedUpdate()
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementInput()
     {
+        if (!GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)) return;
+
         t += direction * movementSpeed * Time.fixedDeltaTime;
 
         // Asegúrese de que t esté en el rango [0, 1]
@@ -64,6 +71,10 @@ public class PlayerController : MonoBehaviour
 
     private void StartGame()
     {
+        if (canMove && !GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)) return;
+
+        BallController ballController = GetComponentInChildren<BallController>();
+
         ballController?.StartMoving();
         canMove = true;
     }

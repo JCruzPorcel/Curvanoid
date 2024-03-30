@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -8,11 +9,58 @@ public class BallController : MonoBehaviour
     [SerializeField] private float decelerationRate = 5f; // Tasa de disminución de velocidad
     private Rigidbody2D rb;
     private bool isMoving = false;
+    [SerializeField] private bool isBurstEnabled = true; // Controla si se activa el burst de velocidad
     private float burstEndTime = 0f;
+    private Vector2 savedVelocity; // Guarda la velocidad antes de detener el movimiento
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameManager.OnGameStateChanged += HandleGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= HandleGameStateChanged;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            // Si estamos dentro del período de burst y el burst está habilitado
+            if (Time.time < burstEndTime && isBurstEnabled)
+            {
+                // Aumentar temporalmente la velocidad hasta el máximo
+                rb.velocity = rb.velocity.normalized * Mathf.Min(rb.velocity.magnitude + maxBurstSpeed * Time.fixedDeltaTime / burstDuration, maxBurstSpeed);
+            }
+            else
+            {
+                // Disminuir gradualmente la velocidad, asegurándose de que no baje del mínimo
+                rb.velocity = rb.velocity.normalized * Mathf.Max(rb.velocity.magnitude - decelerationRate * Time.fixedDeltaTime, initialSpeed);
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Si la bola golpea al jugador, activa el burst de velocidad
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            burstEndTime = Time.time + burstDuration;
+        }
+    }
+
+    private void HandleGameStateChanged(GameManager.GameState newState)
+    {
+        if (newState == GameManager.GameState.InGame)
+        {
+            ResumeMoving();
+        }
+        else
+        {
+            StopMoving();
+        }
     }
 
     public void StartMoving()
@@ -21,6 +69,7 @@ public class BallController : MonoBehaviour
         {
             transform.parent = null;
             rb.velocity = transform.up * initialSpeed; // Establecer la velocidad inicial en la dirección actual
+
             isMoving = true;
         }
     }
@@ -33,33 +82,23 @@ public class BallController : MonoBehaviour
         isMoving = true;
     }
 
-    private void FixedUpdate()
+    private void StopMoving()
     {
         if (isMoving)
         {
-            // Si estamos dentro del período de burst
-            if (Time.time < burstEndTime)
-            {
-                // Aumentar temporalmente la velocidad hasta el máximo
-                rb.velocity = rb.velocity.normalized * Mathf.Min(rb.velocity.magnitude + maxBurstSpeed * Time.fixedDeltaTime / burstDuration, maxBurstSpeed);
-            }
-            else
-            {
-                // Disminuir gradualmente la velocidad, asegurándote de que no baje del mínimo
-                rb.velocity = rb.velocity.normalized * Mathf.Max(rb.velocity.magnitude - decelerationRate * Time.fixedDeltaTime, initialSpeed);
-            }
+            savedVelocity = rb.velocity; // Guardar la velocidad actual antes de detener el movimiento
+            isMoving = false;
+            rb.velocity = Vector2.zero;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void ResumeMoving()
     {
-        // Si la bola golpea al jugador, activa el burst de velocidad
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isMoving && savedVelocity != Vector2.zero)
         {
-            burstEndTime = Time.time + burstDuration;
-        }else if (collision.gameObject.CompareTag("Brick"))
-        {
-            collision.gameObject.SetActive(false);
+            rb.velocity = savedVelocity; // Restaurar la velocidad guardada
+            isMoving = true;
+            savedVelocity = Vector2.zero; // Restablecer la velocidad guardada
         }
     }
 }

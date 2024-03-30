@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
     private bool isPaused = false;
     private int currentLevel = 0;
 
+    [Header("Menu Prefabs")]
     [SerializeField] private GameObject pausePrefab;
     [SerializeField] private GameObject scoreboardPrefab;
     [SerializeField] private GameObject settingsPrefab;
@@ -44,20 +45,13 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Callbacks
-    private void Awake()
-    {
-        CreateMenuInstanceIfNotFound(pausePrefab, pausePrefab.name, ref pauseInstance);
-        CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
-        CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);
-    }
-
     private void Start()
     {
         controls = GameManager.Instance.Controls;
         controls.Enable();
         controls.Player.Pause.performed += ctx =>
         {
-            if (CanToggleMenu())
+            if (CanToggleMenu() && !TransitionManager.Instance.IsTransitioning())
             {
                 PauseMenu();
             }
@@ -120,7 +114,7 @@ public class MenuManager : MonoBehaviour
         UpdateMenuInstance();
     }
 
-    private void UpdateMenuInstance()
+    public void UpdateMenuInstance()
     {
         GetMainMenu();
 
@@ -139,12 +133,18 @@ public class MenuManager : MonoBehaviour
         try
         {
             SceneManager.LoadScene($"Level_{currentLevel}");
+            GameManager.Instance.InGameState();
         }
         catch (Exception ex)
         {
             SceneManager.LoadScene("MainMenu");
+            GameManager.Instance.MainMenuState();
             Debug.Log($"Error, no se pudo cargar la escena: {ex}");
         }
+
+        isPaused = false;
+
+        ClearMenuInstances();
     }
 
     public void Scoreboard()
@@ -180,17 +180,28 @@ public class MenuManager : MonoBehaviour
         isPaused = false;
     }
 
+    private void ClearMenuInstances()
+    {
+        settingsInstance = null;
+        scoreboardInstance = null;
+        pauseInstance = null;
+    }
+
     public void SwitchToScene(string sceneName)
     {
         try
         {
             SceneManager.LoadScene(sceneName);
+            GameManager.Instance.InGameState();
         }
         catch (Exception ex)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenu"); // Puede reemplazarce por 0 para que cargue la primera escena para evitar errores (poner arriba del todo el main menu en dicho caso)
+            GameManager.Instance.MainMenuState();
             Debug.Log($"Error, no se pudo cargar la escena: {ex}");
         }
+
+        ClearMenuInstances();
     }
 
     private bool CanToggleMenu()

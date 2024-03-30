@@ -54,7 +54,14 @@ public class MenuButtonEventHandler : MonoBehaviour
         }
         else
         {
+            if (menuToDeactivate != null)
+            {
+                menuToDeactivate.SetActive(false);
+                menuToDeactivate = null;
+            }
+
             MenuManager.Instance.BackToMenu();
+            MenuManager.Instance.UpdateMenuInstance();
         }
     }
 

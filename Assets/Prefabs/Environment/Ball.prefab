@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159e346214359e949a913a5985c904ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpeed: 15
-  maxBurstSpeed: 20
+  initialSpeed: 7
+  maxBurstSpeed: 10
   burstDuration: 0.5
   decelerationRate: 5
+  isBurstEnabled: 0

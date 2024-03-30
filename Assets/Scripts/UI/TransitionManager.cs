@@ -64,7 +64,7 @@ public class TransitionManager : MonoBehaviour
         StartCoroutine(Transition());
     }
 
-    private void CompleteTransition()
+    private void CompleteTransition() 
     {
         if (CurrentState != TransitionState.Transitioning)
             return;
@@ -92,5 +92,10 @@ public class TransitionManager : MonoBehaviour
 
         CompleteTransition();
         ResetTransition();
+    }
+
+    public bool IsTransitioning()
+    {
+        return CurrentState == TransitionState.Transitioning;
     }
 }

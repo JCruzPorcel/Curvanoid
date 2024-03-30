@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353264298019597648, guid: 0042413c56bad344b84b11bdbc35e8d3, type: 3}
       propertyPath: m_Name
-      value: S_Brick_4 Variant
+      value: S_Brick_4
       objectReference: {fileID: 0}
     - target: {fileID: 5934703462896566218, guid: 0042413c56bad344b84b11bdbc35e8d3, type: 3}
       propertyPath: m_Color.b
