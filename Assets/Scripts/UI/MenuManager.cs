@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,17 +30,26 @@ public class MenuManager : MonoBehaviour
 
     #region Variables
     private bool isPaused = false;
-    private int currentLevel = 0;
+
+    public int currentLevel { get; private set; }
+    public int maxLevels { get; private set; }
 
     [Header("Menu Prefabs")]
     [SerializeField] private GameObject pausePrefab;
     [SerializeField] private GameObject scoreboardPrefab;
     [SerializeField] private GameObject settingsPrefab;
     [SerializeField] private GameObject mainMenuPrefab;
+
+    [Header("Win/Lose Prefabs")]
+    [SerializeField] private GameObject gameOverPrefab;
+    [SerializeField] private GameObject levelCompletPrefab;
+
     private GameObject pauseInstance;
     private GameObject scoreboardInstance;
     private GameObject settingsInstance;
     private GameObject mainMenuInstance;
+    private GameObject gameOverInstance;
+    private GameObject levelCompletInstance;
 
     private GameControls controls;
     #endregion
@@ -51,19 +61,46 @@ public class MenuManager : MonoBehaviour
         controls.Enable();
         controls.Player.Pause.performed += ctx =>
         {
-            if (CanToggleMenu() && !TransitionManager.Instance.IsTransitioning())
+            if (CanToggleMenu())
             {
                 PauseMenu();
             }
         };
+
+        maxLevels = CountLevels();
     }
     #endregion
 
     #region Menu Creation
-    private void CreateMenuInstanceIfNotFound(GameObject prefab, string canvasName, ref GameObject instanceRef)
+    [MenuItem("Tools/Count Levels")]
+    private int CountLevels()
+    {
+        int levelCount = 0;
+
+        // Iterar sobre todas las escenas en el proyecto
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+            // Verificar si la escena no es el menú principal
+            if (sceneName != "MainMenu")
+            {
+                levelCount++;
+            }
+        }
+
+        //Debug.Log("Número de niveles (sin contar el menú principal): " + levelCount);
+
+        return levelCount;
+    }
+
+    private void CreateMenuInstanceIfNotFound(GameObject prefab, ref GameObject instanceRef)
     {
         if (prefab != null && GameObject.Find(prefab.name) == null)
         {
+            string canvasName = prefab.name;
+
             Canvas[] canvasArray = FindObjectsOfType<Canvas>();
 
             // Buscar el primer Canvas que no sea un descendiente del objeto actual
@@ -119,9 +156,9 @@ public class MenuManager : MonoBehaviour
         GetMainMenu();
 
         if (pauseInstance == null)
-            CreateMenuInstanceIfNotFound(pausePrefab, pausePrefab.name, ref pauseInstance);
+            CreateMenuInstanceIfNotFound(pausePrefab, ref pauseInstance);
 
-        if (instance != null)
+        if (pauseInstance != null)
             pauseInstance.SetActive(isPaused);
 
         settingsInstance?.SetActive(false);
@@ -152,9 +189,9 @@ public class MenuManager : MonoBehaviour
         GetMainMenu();
 
         if (scoreboardInstance == null)
-            CreateMenuInstanceIfNotFound(scoreboardPrefab, scoreboardPrefab.name, ref scoreboardInstance);
+            CreateMenuInstanceIfNotFound(scoreboardPrefab, ref scoreboardInstance);
 
-        if (instance != null)
+        if (scoreboardInstance != null)
             scoreboardInstance.SetActive(true);
 
         settingsInstance?.SetActive(false);
@@ -172,6 +209,20 @@ public class MenuManager : MonoBehaviour
     public void SetCurrentLevel(int newLevel)
     {
         currentLevel = newLevel;
+    }
+
+    public void NextLevel()
+    {
+        currentLevel++;
+
+        if (currentLevel < maxLevels)
+        {
+            SwitchToScene($"Level_{currentLevel}");
+        }
+        else
+        {
+            MainMenu();
+        }
     }
 
     private void DesactivateMenu()
@@ -206,7 +257,9 @@ public class MenuManager : MonoBehaviour
 
     private bool CanToggleMenu()
     {
-        return GameManager.Instance.IsCurrentState(GameManager.GameState.InGame) || GameManager.Instance.IsCurrentState(GameManager.GameState.Options);
+        return GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)
+            || GameManager.Instance.IsCurrentState(GameManager.GameState.Options)
+            && !TransitionManager.Instance.IsTransitioning();
     }
 
     public void Settings()
@@ -214,7 +267,7 @@ public class MenuManager : MonoBehaviour
         GetMainMenu();
 
         if (settingsInstance == null)
-            CreateMenuInstanceIfNotFound(settingsPrefab, settingsPrefab.name, ref settingsInstance);
+            CreateMenuInstanceIfNotFound(settingsPrefab, ref settingsInstance);
 
         if (settingsInstance != null)
             settingsInstance.SetActive(true);
@@ -247,6 +300,31 @@ public class MenuManager : MonoBehaviour
         {
             mainMenuInstance?.SetActive(true);
         }
+    }
+
+    public void GameOver()
+    {
+        if (scoreboardInstance == null)
+            CreateMenuInstanceIfNotFound(gameOverPrefab, ref gameOverInstance);
+
+        if (instance != null)
+            gameOverInstance.SetActive(true);
+
+        gameOverInstance.transform.parent = null;
+        GameManager.Instance.GameOverState();
+    }
+
+    public void LevelComplete()
+    {
+        if (scoreboardInstance == null)
+            CreateMenuInstanceIfNotFound(levelCompletPrefab, ref levelCompletInstance);
+
+
+        if (instance != null)
+            levelCompletInstance.SetActive(true);
+
+        levelCompletInstance.transform.parent = null;
+        GameManager.Instance.LevelCompletedState();
     }
 
     public void QuitGame()

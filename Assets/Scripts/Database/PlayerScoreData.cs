@@ -1,7 +1,12 @@
+using UnityEngine;
+
 [System.Serializable]
 public class PlayerScoreData
 {
+    [SerializeField]
     private string playerName;
+
+    [SerializeField]
     private int score;
 
     public PlayerScoreData(string playerName, int score)

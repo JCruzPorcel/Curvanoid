@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6235689459104823530
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4805743521395503697, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_text
+      value: Nivel Completado
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805743521395503697, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_fontStyle
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5261747507560074827, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_text
+      value: "\xA1Ingresa tu nombre para hacer historia!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541021768092021701, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnNextLevelButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722701224404799659, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491309220292364625, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Name
+      value: LevelComplete_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 8383386436155323808, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Name
+      value: P_NextLevel_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533347198748292180, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533347198748292180, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2166329
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533347198748292180, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Color.r
+      value: 0.08401567
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584609481853960140, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: headerStringText
+      value: Tu nombre sera recodado...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630611080702407166, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Name
+      value: P_LevelComplete_Canvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 351660a5bd6a814498136dbd5af67256, type: 3}

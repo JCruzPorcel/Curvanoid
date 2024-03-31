@@ -5,8 +5,8 @@ public abstract class Brick : MonoBehaviour
     public delegate void OnBrickDestroyedDelegate();
     public static event OnBrickDestroyedDelegate OnBrickDestroyed;
 
-    [SerializeField] protected int scoreAmount;
-    protected int hitsRemaining = 1; // Número de golpes restantes antes de destruir el ladrillo
+    [SerializeField] protected int scoreAmount = 10;
+    [SerializeField] protected int hitsRemaining = 1; // Número de golpes restantes antes de destruir el ladrillo
 
     protected virtual void HandleSpecialBrick() { }
 
@@ -25,7 +25,8 @@ public abstract class Brick : MonoBehaviour
 
         OnBrickDestroyed?.Invoke();
 
-        // Todo: Agregar puntaje
+        ScoreController scoreController = FindFirstObjectByType<ScoreController>();
+        scoreController.AddScore(scoreAmount);
 
         gameObject.SetActive(false);
     }

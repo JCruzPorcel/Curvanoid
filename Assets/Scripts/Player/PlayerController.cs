@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         BallController ballController = GetComponentInChildren<BallController>();
 
         ballController?.StartMoving();
+
         canMove = true;
     }
 }

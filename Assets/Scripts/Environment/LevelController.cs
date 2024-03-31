@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -5,8 +6,10 @@ public class LevelController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject winPrefab;
+    [SerializeField] private GameObject losePrefab;
     [Space(10)]
-    [SerializeField,Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")] private Transform artTransform; // Para que este mas ordenada la jerarquia al momento de testear
+    [SerializeField, Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")] private Transform artTransform; // Para que este mas ordenada la jerarquia al momento de testear
 
     private Transform ballPosition;
 
@@ -17,7 +20,7 @@ public class LevelController : MonoBehaviour
         Brick.OnBrickDestroyed += HandleBrickDestroyed;
         remainingBricks = FindObjectsOfType<Brick>().Length;
 
-        GameObject playerPos =  Instantiate(playerPrefab, artTransform);
+        GameObject playerPos = Instantiate(playerPrefab, artTransform);
 
         ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obternemos el trasnform de Ball
     }
@@ -46,7 +49,7 @@ public class LevelController : MonoBehaviour
         if (remainingBricks == 0)
         {
             Debug.Log("¡Has ganado!");
-            GameManager.Instance.LevelCompletedState();
+            MenuManager.Instance.LevelComplete();
         }
     }
 
@@ -55,7 +58,7 @@ public class LevelController : MonoBehaviour
         if (BallOutOfBounds())
         {
             Debug.Log("¡Has perdido!");
-            GameManager.Instance.GameOverState();
+            MenuManager.Instance.GameOver();
         }
     }
 

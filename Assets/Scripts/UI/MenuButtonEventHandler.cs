@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using TMPro;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuButtonEventHandler : MonoBehaviour
 {
@@ -84,6 +87,11 @@ public class MenuButtonEventHandler : MonoBehaviour
         StartTransitionAndExecute(MenuManager.Instance.GetMainMenu);
     }
 
+    public void OnNextLevelButtonClick()
+    {
+        MenuManager.Instance.NextLevel();
+    }
+
     public void SetMenuToActivate(GameObject newMenu)
     {
         menuToActivate = newMenu;
@@ -124,5 +132,6 @@ public class MenuButtonEventHandler : MonoBehaviour
         }
 
         action.Invoke();
-    }
+    }    
 }
+
