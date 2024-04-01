@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4412179325480409823, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
       propertyPath: m_Name
-      value: S_Brick_3
+      value: S_BoosterBrick
       objectReference: {fileID: 0}
     - target: {fileID: 4900622456257670424, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,8 +64,31 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8518009902367778256, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4412179325480409823, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4824448711843869341}
   m_SourcePrefab: {fileID: 100100000, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
+--- !u!1 &1353264298019597648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4412179325480409823, guid: f3360118c1bab2b4e8183443f17a0008, type: 3}
+  m_PrefabInstance: {fileID: 3457910252580124559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4824448711843869341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353264298019597648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98f8c7cb9bd32741a5f5000e6b3fefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreAmount: 10
+  hitsRemaining: 1

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1165466664629775741, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
       propertyPath: m_Name
-      value: S_Brick_2
+      value: S_ConditionalBrick
       objectReference: {fileID: 0}
     - target: {fileID: 5816150631207337959, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
       propertyPath: m_Color.b
@@ -64,8 +64,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -234066434744548949, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1165466664629775741, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8518009902367778256}
   m_SourcePrefab: {fileID: 100100000, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
+--- !u!1 &4412179325480409823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1165466664629775741, guid: 4106af396b5a1e449a4dfcdc0ef51976, type: 3}
+  m_PrefabInstance: {fileID: 3249246499699439522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8518009902367778256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412179325480409823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62f4e5082f07534abe892a5302e6888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreAmount: 10
+  hitsRemaining: 1

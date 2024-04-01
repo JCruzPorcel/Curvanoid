@@ -1775,7 +1775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1620989623}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: WallController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1794,9 +1794,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1318890528}
   - {fileID: 595239407}
   - {fileID: 1071060476}
+  - {fileID: 1318890528}
   - {fileID: 164007689}
   m_Father: {fileID: 1939854348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1876,7 +1876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1672184353}
   m_Layer: 0
-  m_Name: Bricks
+  m_Name: BricksController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1891,7 +1891,7 @@ Transform:
   m_GameObject: {fileID: 1672184352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2068,6 +2068,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431336330724498128, guid: 08e05fb6ae3350444bb79a3fd87637ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630941370369972311, guid: 08e05fb6ae3350444bb79a3fd87637ef, type: 3}
+      propertyPath: anchorOffsetPercentage.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630941370369972311, guid: 08e05fb6ae3350444bb79a3fd87637ef, type: 3}
+      propertyPath: anchorOffsetPercentage.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6244022797637954839, guid: 08e05fb6ae3350444bb79a3fd87637ef, type: 3}
