@@ -61,7 +61,7 @@ public class DatabaseManager : MonoBehaviour
 
         // Verificar si se pudo deserializar correctamente el JSON
         if (dataWrapper == null || dataWrapper.playerScores == null)
-        {
+        { 
             Debug.LogWarning("No se pudieron cargar los puntajes de los jugadores.");
             // Retornar una lista vacía
             return new List<PlayerScoreData>();
@@ -76,6 +76,10 @@ public class DatabaseManager : MonoBehaviour
     {
         List<PlayerScoreData> emptyScores = new List<PlayerScoreData>();
         string jsonData = JsonUtility.ToJson(new PlayerScoreDataWrapper(emptyScores));
+
+        // Especificar la ruta del archivo de puntajes después de crearlo
+        playerScoresFilePath = Path.Combine(Application.streamingAssetsPath, "Database", playerScoresFileName);
+
         File.WriteAllText(playerScoresFilePath, jsonData);
     }
 

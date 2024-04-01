@@ -4,15 +4,25 @@ using UnityEngine;
 public class PlayerScoreData
 {
     [SerializeField]
+    private int id;
+
+    [SerializeField]
     private string playerName;
 
     [SerializeField]
     private int score;
 
-    public PlayerScoreData(string playerName, int score)
+    public PlayerScoreData(int id, string playerName, int score)
     {
+        this.id = id;
         this.playerName = playerName;
         this.score = score;
+    }
+
+    public int Id
+    {
+        get { return id; }
+        set { id = value; }
     }
 
     public string PlayerName

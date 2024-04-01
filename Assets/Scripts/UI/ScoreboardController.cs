@@ -2,6 +2,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
+public class PlayerScoreStyles
+{
+    [Header("Outline")]
+    public Color outlineColor;
+    public Vector2 outlineEffectDistance;
+    [Space(5)][Header("Shadow")]
+    public float shadowAlpha;
+    public Vector2 shadowEffectDistance;
+}
+
 public class ScoreboardController : MonoBehaviour
 {
     [Header("Player Score Prefab")]
@@ -9,6 +20,12 @@ public class ScoreboardController : MonoBehaviour
     [SerializeField] private Transform playerScoreContainer;
     [SerializeField] private TextMeshProUGUI emptyListMessageText;
     [SerializeField, TextArea(5, 15)] private string defaultMessageText;
+
+    [Header("Player Score Styles")]
+    [SerializeField] private PlayerScoreStyles playerStyles;
+    [SerializeField] private PlayerScoreStyles top1Styles;
+    [SerializeField] private PlayerScoreStyles top2Styles;
+    [SerializeField] private PlayerScoreStyles top3Styles;
 
     private void Start()
     {
@@ -48,6 +65,26 @@ public class ScoreboardController : MonoBehaviour
                 if (scoreUI != null)
                 {
                     scoreUI.UpdatePlayerInfo(playerScores[i], i + 1); // Puesto de jugador (comenzando desde 1)
+
+                    // Estilo del ultimo jugador guardado
+                    if (playerScores[i]?.Id == ScoreController.LastPlayerID)
+                    {
+                        scoreUI.ApplyStyles(playerStyles);
+                    }
+
+                    // Aplicar estilos especiales para los tres primeros jugadores
+                    if (i == 0)
+                    {
+                        scoreUI.ApplyStyles(top1Styles);
+                    }
+                    else if (i == 1)
+                    {
+                        scoreUI.ApplyStyles(top2Styles);
+                    }
+                    else if (i == 2)
+                    {
+                        scoreUI.ApplyStyles(top3Styles);
+                    }
                 }
             }
         }

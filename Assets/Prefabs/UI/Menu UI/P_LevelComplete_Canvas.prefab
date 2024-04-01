@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1660150911988422484, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660150911988422484, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660150911988422484, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.81478053
+      objectReference: {fileID: 0}
     - target: {fileID: 4805743521395503697, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_text
       value: Nivel Completado
@@ -19,6 +31,18 @@ PrefabInstance:
     - target: {fileID: 5261747507560074827, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_text
       value: "\xA1Ingresa tu nombre para hacer historia!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531537455894495663, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531537455894495663, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531537455894495663, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5726355790031520580, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_Pivot.x
@@ -100,6 +124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6253540346523865726, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6541021768092021701, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnNextLevelButtonClick
@@ -108,9 +136,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7402789516824653795, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 7491309220292364625, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_Name
       value: LevelComplete_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822476583350329937, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
+      propertyPath: m_Size
+      value: 0.18521945
       objectReference: {fileID: 0}
     - target: {fileID: 8383386436155323808, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
       propertyPath: m_Name

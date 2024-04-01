@@ -10,19 +10,16 @@ public class PlayerController : MonoBehaviour
     private BezierCurve bezierCurve;
     private GameControls controls;
 
-    private void Awake()
-    {
-        bezierCurve = FindFirstObjectByType<BezierCurve>();
-        controls = GameManager.Instance.Controls;
-    }
-
     private void Start()
     {
+        bezierCurve = FindFirstObjectByType<BezierCurve>();
         transform.position = bezierCurve.GetPoint(t);
     }
 
     private void OnEnable()
     {
+        controls = GameManager.Instance.Controls;
+
         controls.Enable();
 
         controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
@@ -31,7 +28,7 @@ public class PlayerController : MonoBehaviour
         controls.Player.Skill.performed += ctx => StartGame();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         controls.Disable();
 
@@ -73,8 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove && !GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)) return;
 
-        BallController ballController = GetComponentInChildren<BallController>();
-
+        BallController ballController = FindFirstObjectByType<BallController>();
         ballController?.StartMoving();
 
         canMove = true;

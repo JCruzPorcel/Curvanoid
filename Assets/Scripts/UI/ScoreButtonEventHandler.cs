@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScoreButtonEventHandler : MonoBehaviour
 {
@@ -8,6 +7,7 @@ public class ScoreButtonEventHandler : MonoBehaviour
     [SerializeField] private GameObject mainMenuButton;
     [SerializeField] private GameObject levelButton;
     [SerializeField] private GameObject alertMessage;
+    [SerializeField] private GameObject scoreboardPanel;
     [SerializeField] private TMP_InputField name_InputField;
     [SerializeField] private TextMeshProUGUI score_Text;
     [SerializeField] private TextMeshProUGUI header_Text;
@@ -56,13 +56,18 @@ public class ScoreButtonEventHandler : MonoBehaviour
                 newButton.SetActive(true);
 
                 // Copiar las propiedades de transformación del botón saveScoreButton al nuevo botón
-                RectTransform saveScoreRectTransform = saveScoreButton.GetComponent<RectTransform>();
+                // RectTransform saveScoreRectTransform = saveScoreButton.GetComponent<RectTransform>();
                 RectTransform newButtonRectTransform = newButton.GetComponent<RectTransform>();
 
-                newButtonRectTransform.anchorMin = saveScoreRectTransform.anchorMin;
-                newButtonRectTransform.anchorMax = saveScoreRectTransform.anchorMax;
-                newButtonRectTransform.pivot = saveScoreRectTransform.pivot;
-                newButtonRectTransform.anchoredPosition = saveScoreRectTransform.anchoredPosition;
+                /*newButtonRectTransform.anchorMin = saveScoreRectTransform.anchorMin;
+                  newButtonRectTransform.anchorMax = saveScoreRectTransform.anchorMax;
+                  newButtonRectTransform.pivot = saveScoreRectTransform.pivot;
+                  newButtonRectTransform.anchoredPosition = saveScoreRectTransform.anchoredPosition;*/
+
+                newButtonRectTransform.anchorMin = new Vector2(0.5f, 0f);
+                newButtonRectTransform.anchorMax = new Vector2(0.5f, 0f);
+                newButtonRectTransform.pivot = new Vector2(0.5f, 0f);
+                newButtonRectTransform.anchoredPosition = new Vector2(0f, 15f);
             }
             else
             {
@@ -71,6 +76,7 @@ public class ScoreButtonEventHandler : MonoBehaviour
                 levelButton.SetActive(true);
             }
 
+            scoreboardPanel.SetActive(true);
         }
         else
         {

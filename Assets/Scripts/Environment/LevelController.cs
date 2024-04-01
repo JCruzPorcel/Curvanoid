@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -15,6 +14,7 @@ public class LevelController : MonoBehaviour
 
     private int remainingBricks;
 
+
     private void Start()
     {
         Brick.OnBrickDestroyed += HandleBrickDestroyed;
@@ -22,7 +22,7 @@ public class LevelController : MonoBehaviour
 
         GameObject playerPos = Instantiate(playerPrefab, artTransform);
 
-        ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obternemos el trasnform de Ball
+        ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obternemos el transform de Ball
     }
 
     private void OnDisable()

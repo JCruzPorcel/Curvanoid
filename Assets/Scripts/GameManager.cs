@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [DefaultExecutionOrder(-100)]
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }                  
+    }
 
     private void Start()
     {
@@ -56,37 +57,90 @@ public class GameManager : MonoBehaviour
             currentGameState = newGameState;
             OnGameStateChanged?.Invoke(newGameState);
             Debug.Log($"Game state changed to: {currentGameState}");
+
+            switch (newGameState)
+            {
+                case GameState.MainMenu:
+                    MainMenuState();
+                    break;
+                case GameState.Options:
+                    OptionsState();
+                    break;
+                case GameState.LevelCompleted:
+                    LevelCompletedState();
+                    break;
+                case GameState.InGame:
+                    InGameState();
+                    break;
+                case GameState.GameOver:
+                    GameOverState();
+                    break;
+            }
         }
     }
 
     public void MainMenuState()
     {
+        if (TransitionManager.Instance.IsTransitioning())
+        {
+            WaitForTransitionAndLoadNextLevel(GameState.MainMenu);
+        }
+
         SetGameState(GameState.MainMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void LevelCompletedState()
     {
+        if (TransitionManager.Instance.IsTransitioning())
+        {
+            WaitForTransitionAndLoadNextLevel(GameState.LevelCompleted);
+        }
+
         SetGameState(GameState.LevelCompleted);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void InGameState()
     {
+        if (TransitionManager.Instance.IsTransitioning())
+        {
+            WaitForTransitionAndLoadNextLevel(GameState.InGame);
+        }
+
         SetGameState(GameState.InGame);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void GameOverState()
     {
+        if (TransitionManager.Instance.IsTransitioning())
+        {
+            WaitForTransitionAndLoadNextLevel(GameState.GameOver);
+        }
+
         SetGameState(GameState.GameOver);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void OptionsState()
     {
+        if (TransitionManager.Instance.IsTransitioning())
+        {
+            WaitForTransitionAndLoadNextLevel(GameState.Options);
+        }
+
         SetGameState(GameState.Options);
         Cursor.lockState = CursorLockMode.None;
+    }
+    private IEnumerator WaitForTransitionAndLoadNextLevel(GameState newGameState)
+    {
+        while (TransitionManager.Instance.IsTransitioning())
+        {
+            yield return null;
+        }
+
+        SetGameState(newGameState);
     }
 
     public bool IsCurrentState(GameState gameState)

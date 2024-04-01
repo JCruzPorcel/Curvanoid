@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -324,7 +325,7 @@ public class MenuManager : MonoBehaviour
             levelCompletInstance.SetActive(true);
 
         levelCompletInstance.transform.parent = null;
-        GameManager.Instance.LevelCompletedState();
+       GameManager.Instance.LevelCompletedState();
     }
 
     public void QuitGame()

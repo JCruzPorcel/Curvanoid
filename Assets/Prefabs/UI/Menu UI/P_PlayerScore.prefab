@@ -81,6 +81,12 @@ MonoBehaviour:
   position_Text: {fileID: 6550159357251820020}
   name_Text: {fileID: 1095337305776861003}
   score_Text: {fileID: 6540660461378837522}
+  position_Outline: {fileID: 1483799799252338804}
+  name_Outline: {fileID: 1512992684678949079}
+  score_Outline: {fileID: 426187936024909009}
+  position_Shadow: {fileID: 1483799799252338804}
+  name_Shadow: {fileID: 1512992684678949079}
+  score_Shadow: {fileID: 426187936024909009}
 --- !u!1 &1034014952265050854
 GameObject:
   m_ObjectHideFlags: 0

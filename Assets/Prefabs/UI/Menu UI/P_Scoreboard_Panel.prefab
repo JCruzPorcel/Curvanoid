@@ -712,6 +712,26 @@ MonoBehaviour:
   emptyListMessageText: {fileID: 8158784041462637108}
   defaultMessageText: "A\xFAn no hay jugadores en la tabla de posiciones.\n\xA1Se
     el primero!"
+  playerStyles:
+    outlineColor: {r: 1, g: 0.94509804, b: 0.8156863, a: 1}
+    outlineEffectDistance: {x: 10, y: -10}
+    shadowAlpha: 50
+    shadowEffectDistance: {x: 10, y: -10}
+  top1Styles:
+    outlineColor: {r: 0.9098039, g: 0.8392157, b: 0.29411766, a: 1}
+    outlineEffectDistance: {x: 10, y: -10}
+    shadowAlpha: 50
+    shadowEffectDistance: {x: 10, y: -10}
+  top2Styles:
+    outlineColor: {r: 0.29411766, g: 0.88235295, b: 0.90588236, a: 1}
+    outlineEffectDistance: {x: 8, y: -8}
+    shadowAlpha: 50
+    shadowEffectDistance: {x: 10, y: -10}
+  top3Styles:
+    outlineColor: {r: 0.29411766, g: 0.90588236, b: 0.3647059, a: 1}
+    outlineEffectDistance: {x: 6, y: -6}
+    shadowAlpha: 50
+    shadowEffectDistance: {x: 10, y: -10}
 --- !u!1 &4794739472904060621
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
-    [HideInInspector] public int score { get; private set; } = 0;
+    public static int? LastPlayerID { get; set; } = null;
+    public int score { get; private set; } = 0;
 
-    [HideInInspector] public TMP_InputField NameInputField { get; set; }
+    public TMP_InputField NameInputField { get; set; }
     [SerializeField] private TextMeshProUGUI scoreText;
 
     public bool SaveScore()
@@ -17,8 +19,13 @@ public class ScoreController : MonoBehaviour
         // Verificar si el nombre del jugador es válido
         if (IsValidPlayerName(playerName))
         {
-            // Crear un objeto PlayerScoreData con el nombre y puntaje
-            PlayerScoreData playerScore = new PlayerScoreData(playerName, score);
+            // Generar un ID único para el jugador
+            int playerId = GenerateUniquePlayerId();
+
+            LastPlayerID = playerId;
+
+            // Crear un objeto PlayerScoreData con el ID, nombre y puntaje
+            PlayerScoreData playerScore = new PlayerScoreData(playerId, playerName, score);
 
             try
             {
@@ -44,6 +51,22 @@ public class ScoreController : MonoBehaviour
         }
     }
 
+    // Genera un ID único para el jugador
+    private int GenerateUniquePlayerId()
+    {
+        // Cargar los puntajes de los jugadores para determinar el último ID utilizado
+        List<PlayerScoreData> playerScores = DatabaseManager.LoadPlayerScores();
+
+        // Obtener el último ID utilizado sumando 1 al ID del último jugador
+        int lastPlayerId = 0;
+        if (playerScores.Count > 0)
+        {
+            lastPlayerId = playerScores[playerScores.Count - 1].Id;
+        }
+        int uniqueId = lastPlayerId + 1;
+
+        return uniqueId;
+    }
 
     private bool IsValidPlayerName(string playerName)
     {

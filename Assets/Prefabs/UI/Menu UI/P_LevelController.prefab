@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 4285201531873152708, guid: d6485e69e18c1754da6ce0befd76289b, type: 3}
   playerPrefab: {fileID: 7339820465239002492, guid: dca07791cc9edd34bb8540060c2906db, type: 3}
+  winPrefab: {fileID: 2400288358254643476, guid: 9be145288267d6644b4ac6d8dce9e98a, type: 3}
+  losePrefab: {fileID: 8630611080702407166, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
   artTransform: {fileID: 0}
 --- !u!114 &4528594457108326073
 MonoBehaviour:
@@ -60,5 +62,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32976cf554403d441815a56e23614643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameInputField: {fileID: 0}
   scoreText: {fileID: 0}

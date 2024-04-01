@@ -35,6 +35,7 @@ public class MenuButtonEventHandler : MonoBehaviour
     public void OnMainMenuButtonClick()
     {
         StartTransitionAndExecute(MenuManager.Instance.MainMenu);
+        ScoreController.LastPlayerID = null;
     }
 
     public void OnSettingsButtonClick()
