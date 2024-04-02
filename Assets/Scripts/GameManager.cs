@@ -45,12 +45,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Controls = new GameControls();
-        currentGameState = GameState.MainMenu;
+        MainMenuState();
     }
     #endregion
 
     #region Game State Methods
-    public void SetGameState(GameState newGameState)
+    private void SetGameState(GameState newGameState)
     {
         if (currentGameState != newGameState)
         {
@@ -83,18 +83,21 @@ public class GameManager : MonoBehaviour
     {
         if (TransitionManager.Instance.IsTransitioning())
         {
-            WaitForTransitionAndLoadNextLevel(GameState.MainMenu);
+            StartCoroutine(WaitForTransitionAndLoadNextLevel(GameState.MainMenu));
+            return;
         }
 
         SetGameState(GameState.MainMenu);
         Cursor.lockState = CursorLockMode.None;
+        AudioManager.Instance.Play(SoundName.Music_MainMenu);
     }
 
     public void LevelCompletedState()
     {
         if (TransitionManager.Instance.IsTransitioning())
         {
-            WaitForTransitionAndLoadNextLevel(GameState.LevelCompleted);
+            StartCoroutine(WaitForTransitionAndLoadNextLevel(GameState.LevelCompleted));
+            return;
         }
 
         SetGameState(GameState.LevelCompleted);
@@ -105,7 +108,8 @@ public class GameManager : MonoBehaviour
     {
         if (TransitionManager.Instance.IsTransitioning())
         {
-            WaitForTransitionAndLoadNextLevel(GameState.InGame);
+            StartCoroutine(WaitForTransitionAndLoadNextLevel(GameState.InGame));
+            return;
         }
 
         SetGameState(GameState.InGame);
@@ -116,7 +120,8 @@ public class GameManager : MonoBehaviour
     {
         if (TransitionManager.Instance.IsTransitioning())
         {
-            WaitForTransitionAndLoadNextLevel(GameState.GameOver);
+            StartCoroutine(WaitForTransitionAndLoadNextLevel(GameState.GameOver));
+            return;
         }
 
         SetGameState(GameState.GameOver);
@@ -127,12 +132,14 @@ public class GameManager : MonoBehaviour
     {
         if (TransitionManager.Instance.IsTransitioning())
         {
-            WaitForTransitionAndLoadNextLevel(GameState.Options);
+            StartCoroutine(WaitForTransitionAndLoadNextLevel(GameState.Options));
+            return;
         }
 
         SetGameState(GameState.Options);
         Cursor.lockState = CursorLockMode.None;
     }
+
     private IEnumerator WaitForTransitionAndLoadNextLevel(GameState newGameState)
     {
         while (TransitionManager.Instance.IsTransitioning())

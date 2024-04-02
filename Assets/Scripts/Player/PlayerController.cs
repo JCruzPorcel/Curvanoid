@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove = false;
 
     private BezierCurve bezierCurve;
-    private GameControls controls;
+    // private GameControls controls;
 
     private void Start()
     {
@@ -18,23 +19,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        controls = GameManager.Instance.Controls;
+        //controls = GameManager.Instance.Controls;
 
-        controls.Enable();
+        //controls.Enable();
 
-        controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
-        controls.Player.Move.canceled += ctx => { direction = 0f; };
+        //controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
+        //controls.Player.Move.canceled += ctx => { direction = 0f; };
 
-        controls.Player.Skill.performed += ctx => StartGame();
+        //controls.Player.Skill.performed += ctx => StartGame();
     }
 
     private void OnDestroy()
     {
-        controls.Disable();
+        //controls.Disable();
 
-        controls.Player.Move.canceled -= ctx => { direction = 0f; };
+        //controls.Player.Move.canceled -= ctx => { direction = 0f; };
 
-        controls.Player.Skill.canceled -= ctx => StartGame();
+        //controls.Player.Skill.canceled -= ctx => StartGame();
     }
 
     private void FixedUpdate()
@@ -66,13 +67,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StartGame()
+    public void StartGame(InputAction.CallbackContext ctx)
     {
-        if (canMove && !GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)) return;
+        if (ctx.performed)
+        {
+            if (!canMove && GameManager.Instance.IsCurrentState(GameManager.GameState.InGame))
+            {
+                BallController ballController = FindFirstObjectByType<BallController>();
+                ballController?.StartMoving();
 
-        BallController ballController = FindFirstObjectByType<BallController>();
-        ballController?.StartMoving();
+                canMove = true;
+            }
+        }
+    }
 
-        canMove = true;
+    // Cambio de Behavior: De C# Events a Unity Events para poder rebindear las teclas
+    // ToDo: Refactorizar codigos relacionados a los controles
+
+    public void GetDirection(InputAction.CallbackContext ctx)
+    {
+        direction = ctx.ReadValue<float>();
     }
 }

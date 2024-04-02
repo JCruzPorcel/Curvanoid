@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -12,10 +11,13 @@ public class BallController : MonoBehaviour
     [SerializeField] private bool isBurstEnabled = true; // Controla si se activa el burst de velocidad
     private float burstEndTime = 0f;
     private Vector2 savedVelocity; // Guarda la velocidad antes de detener el movimiento
+    private CircleCollider2D circleCollider;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        circleCollider.enabled = false;
         GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
 
@@ -49,6 +51,8 @@ public class BallController : MonoBehaviour
         {
             burstEndTime = Time.time + burstDuration;
         }
+
+        AudioManager.Instance.Play(SoundName.SFX_BallImpact);
     }
 
     private void HandleGameStateChanged(GameManager.GameState newState)
@@ -65,10 +69,11 @@ public class BallController : MonoBehaviour
 
     public void StartMoving()
     {
-        if (!isMoving)
+        if (!isMoving && GameManager.Instance.IsCurrentState(GameManager.GameState.InGame))
         {
             transform.parent = null;
             rb.velocity = transform.up * initialSpeed; // Establecer la velocidad inicial en la dirección actual
+            circleCollider.enabled = true;
 
             isMoving = true;
         }
