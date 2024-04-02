@@ -3,18 +3,30 @@ using UnityEngine.InputSystem;
 
 public class RebindSaveLoad : MonoBehaviour
 {
-    public InputActionAsset actions;
+    public InputActionAsset inputActions;
 
-    public void OnEnable()
+    private void OnEnable()
     {
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            actions.LoadBindingOverridesFromJson(rebinds);
+        LoadBindings();
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
-        var rebinds = actions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("rebinds", rebinds);
+        SaveBindings();
+    }
+
+    public void LoadBindings()
+    {
+        var savedBindings = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(savedBindings))
+        {
+            inputActions.LoadBindingOverridesFromJson(savedBindings);
+        }
+    }
+
+    public void SaveBindings()
+    {
+        var bindingsJson = inputActions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", bindingsJson);
     }
 }
