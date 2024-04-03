@@ -73,7 +73,6 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region Menu Creation
-    [MenuItem("Tools/Count Levels")]
     private int CountLevels()
     {
         int levelCount = 0;

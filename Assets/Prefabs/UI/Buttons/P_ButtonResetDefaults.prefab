@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6519093361257747358}
   - component: {fileID: 8383258179963144824}
   m_Layer: 5
-  m_Name: P_ResetDefaults_Button
+  m_Name: P_ButtonResetDefaults
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.9716981, g: 0.24292453, b: 0.34481546, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.93, g: 0.2325, b: 0.32999992, a: 1}
+    m_PressedColor: {r: 0.75, g: 0.1875, b: 0.26612896, a: 1}
+    m_SelectedColor: {r: 0.93, g: 0.2325, b: 0.32999992, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

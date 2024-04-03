@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Utils.JCruzPorcel.AudioManager;
 
 public class BallController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class BallController : MonoBehaviour
     private Vector2 savedVelocity; // Guarda la velocidad antes de detener el movimiento
     private CircleCollider2D circleCollider;
 
-    private void Start()
+    private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
@@ -46,13 +47,29 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Calcula la fuerza del impacto usando la velocidad relativa de la colisión
+        float impactForce = collision.relativeVelocity.magnitude;
+
+        // Define un umbral para considerar que el impacto es lo suficientemente fuerte
+        float impactThreshold = initialSpeed;
+
+        // Comprueba si la fuerza del impacto supera el umbral
+        if (impactForce > impactThreshold)
+        {
+            // Reproduce el sonido de impacto solo si el impacto es lo suficientemente fuerte
+            Instance.Play(SoundName.SFX_BallImpact); // Se obtiene desde el Utils.JCruzPorcel.AudioManager
+
+            if (collision.gameObject.CompareTag("Brick"))
+            {
+                collision.gameObject.GetComponent<Brick>().TrackHits();
+            }
+        }
+
         // Si la bola golpea al jugador, activa el burst de velocidad
         if (collision.gameObject.CompareTag("Player"))
         {
             burstEndTime = Time.time + burstDuration;
         }
-
-        AudioManager.Instance.Play(SoundName.SFX_BallImpact);
     }
 
     private void HandleGameStateChanged(GameManager.GameState newState)
@@ -71,10 +88,9 @@ public class BallController : MonoBehaviour
     {
         if (!isMoving && GameManager.Instance.IsCurrentState(GameManager.GameState.InGame))
         {
+            circleCollider.enabled = true;
             transform.parent = null;
             rb.velocity = transform.up * initialSpeed; // Establecer la velocidad inicial en la dirección actual
-            circleCollider.enabled = true;
-
             isMoving = true;
         }
     }
@@ -91,6 +107,7 @@ public class BallController : MonoBehaviour
     {
         if (isMoving)
         {
+            circleCollider.enabled = false;
             savedVelocity = rb.velocity; // Guardar la velocidad actual antes de detener el movimiento
             isMoving = false;
             rb.velocity = Vector2.zero;
@@ -101,6 +118,7 @@ public class BallController : MonoBehaviour
     {
         if (!isMoving && savedVelocity != Vector2.zero)
         {
+            circleCollider.enabled = true;
             rb.velocity = savedVelocity; // Restaurar la velocidad guardada
             isMoving = true;
             savedVelocity = Vector2.zero; // Restablecer la velocidad guardada

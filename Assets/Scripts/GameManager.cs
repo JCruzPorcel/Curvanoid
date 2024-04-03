@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
         SetGameState(GameState.MainMenu);
         Cursor.lockState = CursorLockMode.None;
-        AudioManager.Instance.Play(SoundName.Music_MainMenu);
+        Utils.JCruzPorcel.AudioManager.Instance.Play(Utils.JCruzPorcel.AudioManager.SoundName.Music_MainMenu);
     }
 
     public void LevelCompletedState()

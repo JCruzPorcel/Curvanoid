@@ -12,17 +12,19 @@ public class LevelController : MonoBehaviour
 
     private Transform ballPosition;
 
-    private int remainingBricks;
+    public int initialBallCount = 1;
+
+    public int RemainingBricks { get; set; }
 
 
     private void Start()
     {
         Brick.OnBrickDestroyed += HandleBrickDestroyed;
-        remainingBricks = FindObjectsOfType<Brick>().Length;
+        RemainingBricks = FindObjectsOfType<Brick>().Length;
 
         GameObject playerPos = Instantiate(playerPrefab, artTransform);
 
-        ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obternemos el transform de Ball
+        ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obtenemos el transform de Ball
     }
 
     private void OnDisable()
@@ -40,13 +42,13 @@ public class LevelController : MonoBehaviour
 
     private void HandleBrickDestroyed()
     {
-        remainingBricks--;
+        RemainingBricks--;
         CheckWinCondition();
     }
 
     private void CheckWinCondition()
     {
-        if (remainingBricks == 0)
+        if (RemainingBricks == 0)
         {
             Debug.Log("¡Has ganado!");
             MenuManager.Instance.LevelComplete();
@@ -56,6 +58,11 @@ public class LevelController : MonoBehaviour
     private void CheckLoseCondition()
     {
         if (BallOutOfBounds())
+        {
+            initialBallCount--;
+        }
+
+        if (initialBallCount <= 0)
         {
             Debug.Log("¡Has perdido!");
             MenuManager.Instance.GameOver();

@@ -6,22 +6,23 @@ public abstract class Brick : MonoBehaviour
     public static event OnBrickDestroyedDelegate OnBrickDestroyed;
 
     [SerializeField] protected int scoreAmount = 10;
-    [SerializeField] protected int hitsRemaining = 1; // Número de golpes restantes antes de destruir el ladrillo
+    [SerializeField] protected int hitsRemaining = 1;
+    [SerializeField] protected bool useRandomColorOnStart;
 
     protected virtual void HandleSpecialBrick() { }
 
-    protected virtual void TrackHits()
+    public virtual void TrackHits()
     {
-        hitsRemaining--; // Restar uno al número de golpes restantes
+        hitsRemaining--;
         if (hitsRemaining <= 0)
         {
-            DestroyBrick(); // Destruir el ladrillo si no quedan golpes restantes
+            DestroyBrick();
         }
     }
 
-    protected void DestroyBrick()
+    protected virtual void DestroyBrick()
     {
-        HandleSpecialBrick(); // Llamar al método para manejar ladrillos especiales
+        HandleSpecialBrick();
 
         OnBrickDestroyed?.Invoke();
 
@@ -31,11 +32,22 @@ public abstract class Brick : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void Start()
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        if (useRandomColorOnStart)
         {
-            TrackHits(); // Llamar al método para rastrear el número de golpes
+            SetRandomColor();
         }
+    }
+
+    private void SetRandomColor()
+    {
+        Color newColor = new Color(Random.value, Random.value, Random.value);
+        GetComponent<SpriteRenderer>().color = newColor;
+    }
+
+    protected void OnBrickDestroyedInvoke()
+    {
+        OnBrickDestroyed?.Invoke();
     }
 }

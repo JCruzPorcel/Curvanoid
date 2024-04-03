@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using TMPro;
-using UnityEditor.Experimental.RestService;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MenuButtonEventHandler : MonoBehaviour
 {
@@ -71,7 +68,7 @@ public class MenuButtonEventHandler : MonoBehaviour
 
     public void OnQuitGameButtonClick()
     {
-        MenuManager.Instance.QuitGame();
+        StartTransitionAndExecute(MenuManager.Instance.QuitGame);
     }
 
     public void OnSelectLevelButtonClick(int currentLevel)
@@ -133,6 +130,6 @@ public class MenuButtonEventHandler : MonoBehaviour
         }
 
         action.Invoke();
-    }    
+    }
 }
 
