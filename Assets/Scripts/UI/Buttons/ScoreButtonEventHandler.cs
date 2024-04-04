@@ -28,6 +28,20 @@ public class ScoreButtonEventHandler : MonoBehaviour
         {
             Debug.LogError("ScoreController no encontrado en la escena.");
         }
+
+        UpdateButtonText();
+    }
+
+    private void UpdateButtonText()
+    {
+        if (GameManager.Instance.IsCurrentState(GameManager.GameState.LevelCompleted))
+        {
+            levelButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Siguiente Nivel";
+        }
+        else if (GameManager.Instance.IsCurrentState(GameManager.GameState.GameOver))
+        {
+            levelButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reiniciar";
+        }
     }
 
     public void OnSaveScoreButtonClick()
@@ -52,22 +66,21 @@ public class ScoreButtonEventHandler : MonoBehaviour
                 levelButton.SetActive(false);
 
                 // Crear una instancia del botón de menú principal
-                GameObject newButton = Instantiate(mainMenuButton, mainMenuButton.transform.parent);
-                newButton.SetActive(true);
+                mainMenuButton.SetActive(true);
 
                 // Copiar las propiedades de transformación del botón saveScoreButton al nuevo botón
                 // RectTransform saveScoreRectTransform = saveScoreButton.GetComponent<RectTransform>();
-                RectTransform newButtonRectTransform = newButton.GetComponent<RectTransform>();
+                RectTransform mainMenuButtonRectTransform = mainMenuButton.GetComponent<RectTransform>();
 
                 /*newButtonRectTransform.anchorMin = saveScoreRectTransform.anchorMin;
                   newButtonRectTransform.anchorMax = saveScoreRectTransform.anchorMax;
                   newButtonRectTransform.pivot = saveScoreRectTransform.pivot;
                   newButtonRectTransform.anchoredPosition = saveScoreRectTransform.anchoredPosition;*/
 
-                newButtonRectTransform.anchorMin = new Vector2(0.5f, 0f);
-                newButtonRectTransform.anchorMax = new Vector2(0.5f, 0f);
-                newButtonRectTransform.pivot = new Vector2(0.5f, 0f);
-                newButtonRectTransform.anchoredPosition = new Vector2(0f, 15f);
+                mainMenuButtonRectTransform.anchorMin = new Vector2(0.5f, 0f);
+                mainMenuButtonRectTransform.anchorMax = new Vector2(0.5f, 0f);
+                mainMenuButtonRectTransform.pivot = new Vector2(0.5f, 0f);
+                mainMenuButtonRectTransform.anchoredPosition = new Vector2(0f, 15f);
             }
             else
             {

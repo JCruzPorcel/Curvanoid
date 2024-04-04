@@ -14,23 +14,26 @@ public class ButtonSoundHandler : MonoBehaviour
     {
         foreach (ButtonSound sound in sounds)
         {
-            soundDictionary[sound.clickSoundName] = sound;
-
-            if (sound.playHoverSound)
+            if (sound.button != null)
             {
-                EventTrigger trigger = sound.button.gameObject.GetComponent<EventTrigger>();
-                if (trigger == null)
-                    trigger = sound.button.gameObject.AddComponent<EventTrigger>();
+                soundDictionary[sound.clickSoundName] = sound;
 
-                EventTrigger.Entry entryHover = new EventTrigger.Entry();
-                entryHover.eventID = EventTriggerType.PointerEnter;
-                entryHover.callback.AddListener((eventData) => { Instance.Play(sound.hoverSoundName); });
-                trigger.triggers.Add(entryHover);
-            }
+                if (sound.playHoverSound)
+                {
+                    EventTrigger trigger = sound.button.gameObject.GetComponent<EventTrigger>();
+                    if (trigger == null)
+                        trigger = sound.button.gameObject.AddComponent<EventTrigger>();
 
-            if (sound.playClickSound)
-            {
-                sound.button.onClick.AddListener(() => { Instance.Play(sound.clickSoundName); });
+                    EventTrigger.Entry entryHover = new EventTrigger.Entry();
+                    entryHover.eventID = EventTriggerType.PointerEnter;
+                    entryHover.callback.AddListener((eventData) => { Instance.Play(sound.hoverSoundName); });
+                    trigger.triggers.Add(entryHover);
+                }
+
+                if (sound.playClickSound)
+                {
+                    sound.button.onClick.AddListener(() => { Instance.Play(sound.clickSoundName); });
+                }
             }
         }
     }

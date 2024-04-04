@@ -310,7 +310,7 @@ public class MenuManager : MonoBehaviour
         if (instance != null)
             gameOverInstance.SetActive(true);
 
-        gameOverInstance.transform.parent = null;
+        gameOverInstance.transform.SetParent(null); 
         GameManager.Instance.GameOverState();
     }
 
@@ -323,7 +323,7 @@ public class MenuManager : MonoBehaviour
         if (instance != null)
             levelCompletInstance.SetActive(true);
 
-        levelCompletInstance.transform.parent = null;
+        levelCompletInstance.transform.SetParent(null);
        GameManager.Instance.LevelCompletedState();
     }
 

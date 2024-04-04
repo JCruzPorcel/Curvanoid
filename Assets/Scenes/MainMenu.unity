@@ -408,11 +408,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1854921675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &722504403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5262736201018583313, guid: eee2314bd6f5c3a4aad25ff43ec2957b, type: 3}
-  m_PrefabInstance: {fileID: 7159842215703433395}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &817813169 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5481429806049527568, guid: 3ce9fa270d9e5f746b1df96028845731, type: 3}
@@ -613,26 +608,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: '[Button] Start Button'
-    hoverSoundName: 3
-    clickSoundName: 5
+    hoverSoundName: 6
+    clickSoundName: 8
     button: {fileID: 296464761}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Scoreboard'
-    hoverSoundName: 3
-    clickSoundName: 5
+    hoverSoundName: 6
+    clickSoundName: 8
     button: {fileID: 221543267}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Settings'
-    hoverSoundName: 3
-    clickSoundName: 5
+    hoverSoundName: 6
+    clickSoundName: 8
     button: {fileID: 422592326}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Exit'
-    hoverSoundName: 3
-    clickSoundName: 8
+    hoverSoundName: 6
+    clickSoundName: 11
     button: {fileID: 2050827622}
     playHoverSound: 1
     playClickSound: 1
@@ -644,82 +639,210 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 174262226012884468, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: mainMenuPrefab
-      value: 
-      objectReference: {fileID: 722504403}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d765f60f04d6f1641b09f5fc0914aed4, type: 3}
-    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: '[Music] Main Menu'
+      propertyPath: sounds.Array.size
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
+      propertyPath: sounds.Array.data[0].loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: '[Music] Level 0'
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5abfe73168e1b8b438fe3d3a3bdefc42, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: dc59970cf10ea6349920130728c2ddf4, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: '[UI] Hover'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 19bcb0e7feff7634b9498804e45afa2f, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: '[UI] Click'
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: sounds.Array.data[7].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 92675b266ebe3a54d881da15d4eeeb1f, type: 3}
+      objectReference: {fileID: 8300000, guid: bfb138370ddfe48428739b668a3fda7a, type: 3}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: sounds.Array.data[7].name
+      value: '[UI] Click Back Button'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 92675b266ebe3a54d881da15d4eeeb1f, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[8].name
       value: '[UI] Click Exit Button'
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[7].pitch
+      propertyPath: sounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: dd280b78b8eb6cb4f8b0919d4925dfb4, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[9].name
+      value: '[UI] Hover Level Button'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d2df460a6fbfe5f4581c6f74961b4710, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[10].name
+      value: '[UI] Click Level Button'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].name
+      value: '[SFX] Ball Impact'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].name
+      value: '[SFX] Destroy Brick'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 27a9ad32f8fb9c34da3d9121b7b90ec7, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].name
+      value: '[UI] Save Button'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.15
+      propertyPath: sounds.Array.data[13].pitch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: sounds.Array.data[7].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[0].soundName
+      propertyPath: sounds.Array.data[8].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[1].soundName
-      value: 2
+      propertyPath: sounds.Array.data[9].volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[2].soundName
-      value: 9
+      propertyPath: sounds.Array.data[10].volume
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[3].soundName
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[4].soundName
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[7].queueSize
+      propertyPath: sounds.Array.data[12].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[7].soundName
+      propertyPath: sounds.Array.data[13].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[5].queueSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[5].soundName
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[6].queueSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[6].soundName
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
-      propertyPath: sounds.Array.data[7].mixergroup
+      propertyPath: sounds.Array.data[7].soundName
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[8].soundName
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[9].queueSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[9].soundName
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[10].soundName
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].queueSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].soundName
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].queueSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].soundName
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].queueSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].soundName
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[0].playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].mixergroup
       value: 
       objectReference: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].mixergroup
+      value: 
+      objectReference: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[1].playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[2].playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[3].playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[4].playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4404421915134270637, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: m_Name
       value: === MANAGER ===

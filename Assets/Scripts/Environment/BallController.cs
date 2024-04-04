@@ -51,7 +51,7 @@ public class BallController : MonoBehaviour
         float impactForce = collision.relativeVelocity.magnitude;
 
         // Define un umbral para considerar que el impacto es lo suficientemente fuerte
-        float impactThreshold = initialSpeed;
+        float impactThreshold = 4.5f;
 
         // Comprueba si la fuerza del impacto supera el umbral
         if (impactForce > impactThreshold)

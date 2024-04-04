@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -24,6 +23,8 @@ namespace Utils.JCruzPorcel
             UI_ClickLevelButton,
             UI_ClickBackButton,
             UI_ClickExitButton,
+            UI_ContinueButton,
+            UI_SaveButton,
             SFX_BallImpact,
             SFX_DestroyBrick,
         }
@@ -31,14 +32,12 @@ namespace Utils.JCruzPorcel
         public static AudioManager Instance { get; private set; }
 
         [SerializeField] Sound[] sounds;
-        private Dictionary<SoundName, Queue<AudioSource>> soundPool = new Dictionary<SoundName, Queue<AudioSource>>();
+        private Dictionary<SoundName, AudioSource> audioSources = new Dictionary<SoundName, AudioSource>();
 
-        void Awake()
+        private void Awake()
         {
             if (Instance == null)
-            {
                 Instance = this;
-            }
             else
             {
                 Destroy(gameObject);
@@ -47,71 +46,44 @@ namespace Utils.JCruzPorcel
 
             foreach (Sound sound in sounds)
             {
-                Queue<AudioSource> audioSourcePool = new Queue<AudioSource>();
-                int queueSize = sound.queueSize > 0 ? sound.queueSize : 1;
-                for (int i = 0; i < queueSize; i++)
+                if (sound.queueSize > 0)
                 {
-                    AudioSource source = gameObject.AddComponent<AudioSource>();
+                    GameObject obj = new GameObject(sound.name);
+                    obj.transform.SetParent(transform);
+                    AudioSource source = obj.AddComponent<AudioSource>();
                     source.clip = sound.clip;
                     source.outputAudioMixerGroup = sound.mixergroup;
                     source.volume = sound.volume;
                     source.pitch = sound.pitch;
                     source.loop = sound.loop;
                     source.playOnAwake = sound.playOnAwake;
-                    source.enabled = false;
-                    audioSourcePool.Enqueue(source);
+                    audioSources[sound.soundName] = source;
                 }
-                soundPool[sound.soundName] = audioSourcePool;
             }
         }
 
         public void Play(SoundName soundName)
         {
             if (soundName == SoundName.NoSound)
-            {
                 return;
-            }
 
-            if (!soundPool.ContainsKey(soundName))
+            if (!audioSources.ContainsKey(soundName))
             {
                 Debug.LogWarning($"Sound: {soundName} not found!");
                 return;
             }
 
-            Queue<AudioSource> audioSourceQueue = soundPool[soundName];
-
-            if (audioSourceQueue.Count == 0)
-            {
-                Debug.LogWarning($"No available AudioSource for sound: {soundName}");
-                return;
-            }
-
-            AudioSource source = audioSourceQueue.Dequeue();
-            source.enabled = true;
-
-            if (!source.loop)
-                StartCoroutine(PlaySoundCoroutine(source, soundName));
-        }
-
-        private IEnumerator PlaySoundCoroutine(AudioSource source, SoundName soundName)
-        {
-            source.Play();
-            yield return new WaitForSeconds(source.clip.length);
-            source.enabled = false;
-            soundPool[soundName].Enqueue(source);
+            audioSources[soundName].Play();
         }
 
         public void Stop(SoundName soundName)
         {
-            foreach (var source in soundPool[soundName])
-            {
-                source.Stop();
-                source.enabled = false;
-            }
+            if (audioSources.ContainsKey(soundName))
+                audioSources[soundName].Stop();
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Sound
     {
         public string name;
@@ -127,8 +99,5 @@ namespace Utils.JCruzPorcel
         public bool loop = false;
         public bool playOnAwake = false;
         [Range(1, 20)] public int queueSize = 1;
-
-        [HideInInspector]
-        public AudioSource source;
     }
 }

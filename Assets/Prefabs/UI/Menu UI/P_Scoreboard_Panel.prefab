@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 8440996359466404970}
   - component: {fileID: 4203187832012592472}
   - component: {fileID: 7951261323584500763}
+  - component: {fileID: 3939255249772811651}
   m_Layer: 5
   m_Name: P_Scoreboard_Panel
   m_TagString: Untagged
@@ -732,6 +733,25 @@ MonoBehaviour:
     outlineEffectDistance: {x: 6, y: -6}
     shadowAlpha: 50
     shadowEffectDistance: {x: 10, y: -10}
+--- !u!114 &3939255249772811651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4457469527184034034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0547de67ee613e745841e657c4332d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: '[Button] Back To Menu'
+    hoverSoundName: 6
+    clickSoundName: 10
+    button: {fileID: 1916310166529926570}
+    playHoverSound: 1
+    playClickSound: 1
 --- !u!1 &4794739472904060621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,3 +1552,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1361722697076502361, guid: 306d9f59ca30cda47834166378580c2c, type: 3}
   m_PrefabInstance: {fileID: 1814412383757496383}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1916310166529926570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 267418281757054357, guid: 306d9f59ca30cda47834166378580c2c, type: 3}
+  m_PrefabInstance: {fileID: 1814412383757496383}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

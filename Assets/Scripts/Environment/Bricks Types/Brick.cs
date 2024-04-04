@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Utils.JCruzPorcel.AudioManager;
 
 public abstract class Brick : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public abstract class Brick : MonoBehaviour
         HandleSpecialBrick();
 
         OnBrickDestroyed?.Invoke();
+
+        Instance.Play(SoundName.SFX_DestroyBrick); // AudioManager
 
         ScoreController scoreController = FindFirstObjectByType<ScoreController>();
         scoreController.AddScore(scoreAmount);

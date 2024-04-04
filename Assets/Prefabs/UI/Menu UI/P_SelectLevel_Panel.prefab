@@ -156,32 +156,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: '[Button] Level 0'
-    hoverSoundName: 2
-    clickSoundName: 3
+    hoverSoundName: 7
+    clickSoundName: 9
     button: {fileID: 4713840717255417149}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Level 1'
-    hoverSoundName: 2
-    clickSoundName: 3
+    hoverSoundName: 7
+    clickSoundName: 9
     button: {fileID: 7406918931294780834}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Level 2'
-    hoverSoundName: 2
-    clickSoundName: 3
+    hoverSoundName: 7
+    clickSoundName: 9
     button: {fileID: 6283158148063399040}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Level 3'
-    hoverSoundName: 2
-    clickSoundName: 3
+    hoverSoundName: 7
+    clickSoundName: 9
     button: {fileID: 8865778489252346907}
     playHoverSound: 1
     playClickSound: 1
   - name: '[Button] Back To Menu'
-    hoverSoundName: 3
-    clickSoundName: 6
+    hoverSoundName: 6
+    clickSoundName: 10
     button: {fileID: 995979387572360876}
     playHoverSound: 1
     playClickSound: 1

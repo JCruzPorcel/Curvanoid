@@ -104,28 +104,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: '[Music] Main Menu 0'
-    soundName: 0
-    clip: {fileID: 8300000, guid: d2df460a6fbfe5f4581c6f74961b4710, type: 3}
+  - name: '[Music] Main Menu'
+    soundName: 1
+    clip: {fileID: 8300000, guid: d765f60f04d6f1641b09f5fc0914aed4, type: 3}
     mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    queueSize: 1
-    source: {fileID: 0}
-  - name: '[Music] Main Menu 2'
-    soundName: 0
-    clip: {fileID: 8300000, guid: 5abfe73168e1b8b438fe3d3a3bdefc42, type: 3}
-    mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
-    volume: 0.05
+    volume: 0.15
     pitch: 1
     loop: 1
     playOnAwake: 1
     queueSize: 1
-    source: {fileID: 0}
-  - name: '[SFX] Ball Impact'
+  - name: '[Music] Level 0'
+    soundName: 2
+    clip: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
+    mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    playOnAwake: 1
+    queueSize: 1
+  - name: '[Music] Level 1'
+    soundName: 3
+    clip: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
+    mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    playOnAwake: 1
+    queueSize: 1
+  - name: '[Music] Level 2'
     soundName: 4
+    clip: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
+    mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    playOnAwake: 1
+    queueSize: 1
+  - name: '[Music] Level 3'
+    soundName: 5
+    clip: {fileID: 8300000, guid: 5abfe73168e1b8b438fe3d3a3bdefc42, type: 3}
+    mixergroup: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    playOnAwake: 1
+    queueSize: 1
+  - name: '[SFX] Ball Impact'
+    soundName: 12
     clip: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
     mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     volume: 1
@@ -133,9 +158,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     queueSize: 1
-    source: {fileID: 0}
   - name: '[UI] Hover'
-    soundName: 2
+    soundName: 6
     clip: {fileID: 8300000, guid: dc59970cf10ea6349920130728c2ddf4, type: 3}
     mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     volume: 1
@@ -143,9 +167,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     queueSize: 20
-    source: {fileID: 0}
   - name: '[UI] Click'
-    soundName: 3
+    soundName: 8
     clip: {fileID: 8300000, guid: 19bcb0e7feff7634b9498804e45afa2f, type: 3}
     mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     volume: 1
@@ -153,9 +176,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     queueSize: 1
-    source: {fileID: 0}
   - name: '[UI] Click Back Button'
-    soundName: 6
+    soundName: 10
     clip: {fileID: 8300000, guid: bfb138370ddfe48428739b668a3fda7a, type: 3}
     mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     volume: 0.131
@@ -163,9 +185,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     queueSize: 1
-    source: {fileID: 0}
   - name: '[UI] Click Exit Button'
-    soundName: 8
+    soundName: 11
     clip: {fileID: 8300000, guid: 92675b266ebe3a54d881da15d4eeeb1f, type: 3}
     mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     volume: 1
@@ -173,7 +194,24 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     queueSize: 1
-    source: {fileID: 0}
+  - name: '[UI] Hover Level Button'
+    soundName: 7
+    clip: {fileID: 8300000, guid: dd280b78b8eb6cb4f8b0919d4925dfb4, type: 3}
+    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    queueSize: 1
+  - name: '[UI] Click Level Button'
+    soundName: 9
+    clip: {fileID: 8300000, guid: d2df460a6fbfe5f4581c6f74961b4710, type: 3}
+    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    queueSize: 1
 --- !u!1 &4404421915134270637
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +295,7 @@ MonoBehaviour:
   pausePrefab: {fileID: 2443263613659673936, guid: 36f1d61438682d44d9618fbc5c3cf333, type: 3}
   scoreboardPrefab: {fileID: 4457469527184034034, guid: 4610730eef8465b41ba8cb0b67263303, type: 3}
   settingsPrefab: {fileID: 1257020246353892275, guid: dc94554b8aff3df428495ef0563a7347, type: 3}
-  mainMenuPrefab: {fileID: 0}
+  mainMenuPrefab: {fileID: 5262736201018583313, guid: eee2314bd6f5c3a4aad25ff43ec2957b, type: 3}
   gameOverPrefab: {fileID: 8630611080702407166, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
   levelCompletPrefab: {fileID: 2400288358254643476, guid: 9be145288267d6644b4ac6d8dce9e98a, type: 3}
 --- !u!114 &4477692699011177746
