@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Utils.JCruzPorcel.AudioManager;
 
 public abstract class Brick : MonoBehaviour
 {
@@ -23,16 +22,16 @@ public abstract class Brick : MonoBehaviour
 
     protected virtual void DestroyBrick()
     {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
         HandleSpecialBrick();
 
-        OnBrickDestroyed?.Invoke();
-
-        Instance.Play(SoundName.SFX_DestroyBrick); // AudioManager
+        AudioManager.Instance.PlaySoundOnObject(this.gameObject, SoundName.SFX_DestroyBrick);
 
         ScoreController scoreController = FindFirstObjectByType<ScoreController>();
         scoreController.AddScore(scoreAmount);
 
-        gameObject.SetActive(false);
+        OnBrickDestroyed?.Invoke();
     }
 
     protected virtual void Start()
@@ -47,10 +46,5 @@ public abstract class Brick : MonoBehaviour
     {
         Color newColor = new Color(Random.value, Random.value, Random.value);
         GetComponent<SpriteRenderer>().color = newColor;
-    }
-
-    protected void OnBrickDestroyedInvoke()
-    {
-        OnBrickDestroyed?.Invoke();
     }
 }

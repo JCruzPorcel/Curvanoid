@@ -757,13 +757,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2882235318365353331}
     m_Modifications:
+    - target: {fileID: 860093010920053201, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 860093010920053201, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 860093010920053201, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 860093010920053201, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 860093010920053201, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186787912680629385, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
       propertyPath: m_Name
       value: P_ConditionalKey
       objectReference: {fileID: 0}
     - target: {fileID: 6344242457541546534, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6344242457541546534, guid: 6de8ea1e2a2acd044b3a9a88462893dd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6211,17 +6231,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 900011'
+  m_text: 'Score: 980011'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3995ef0b8917364d9c11fc3ca044861, type: 2}
+  m_sharedMaterial: {fileID: -262781831583194825, guid: d3995ef0b8917364d9c11fc3ca044861, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282466625
+  m_fontColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6238,13 +6258,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 35
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535

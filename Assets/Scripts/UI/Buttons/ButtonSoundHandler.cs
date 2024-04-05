@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Utils.JCruzPorcel.AudioManager;
 
 public class ButtonSoundHandler : MonoBehaviour
 {
@@ -26,13 +25,16 @@ public class ButtonSoundHandler : MonoBehaviour
 
                     EventTrigger.Entry entryHover = new EventTrigger.Entry();
                     entryHover.eventID = EventTriggerType.PointerEnter;
-                    entryHover.callback.AddListener((eventData) => { Instance.Play(sound.hoverSoundName); });
+                    entryHover.callback.AddListener((eventData) =>
+                    {
+                        AudioManager.Instance.PlaySoundOnObject(sound.button.gameObject, sound.hoverSoundName);
+                    });
                     trigger.triggers.Add(entryHover);
                 }
 
                 if (sound.playClickSound)
                 {
-                    sound.button.onClick.AddListener(() => { Instance.Play(sound.clickSoundName); });
+                    sound.button.onClick.AddListener(() => { AudioManager.Instance.Play(sound.clickSoundName); });
                 }
             }
         }

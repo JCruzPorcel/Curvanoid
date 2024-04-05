@@ -7,7 +7,7 @@ public class KeyController : MonoBehaviour
 
     [SerializeField] private float fallSpeed = 2f;
 
-    [SerializeField] private bool isFalling = false;
+    public bool isFalling = false;
 
     private LevelController levelController;
 
@@ -22,12 +22,13 @@ public class KeyController : MonoBehaviour
         {
             OnKeyAcquired?.Invoke(true);
             gameObject.SetActive(false);
-            Debug.Log("player");
         }
     }
 
     private void FixedUpdate()
     {
+        if (!GameManager.Instance.IsCurrentState(GameManager.GameState.InGame)) return;
+
         if (isFalling)
         {
             Vector3 newPosition = transform.position + Vector3.down * fallSpeed * Time.fixedDeltaTime;
@@ -40,12 +41,9 @@ public class KeyController : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        else
+        if (levelController != null && levelController.RemainingBricks == 1)
         {
-            if (levelController != null && levelController.RemainingBricks == 1)
-            {
-                isFalling = true;
-            }
+            isFalling = true;
         }
     }
 }

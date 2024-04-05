@@ -8,11 +8,11 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject winPrefab;
     [SerializeField] private GameObject losePrefab;
     [Space(10)]
-    [SerializeField, Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")] private Transform artTransform; // Para que este mas ordenada la jerarquia al momento de testear
-
+    // Para que este mas ordenada la jerarquia al momento de testear
+    [SerializeField, Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")] private Transform artTransform; 
     private Transform ballPosition;
 
-    public int initialBallCount = 1;
+    public int InitialBallCount { get; set; } = 1;
 
     public int RemainingBricks { get; set; }
 
@@ -20,7 +20,9 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         Brick.OnBrickDestroyed += HandleBrickDestroyed;
+
         RemainingBricks = FindObjectsOfType<Brick>().Length;
+        // Debug.Log("Cantidad de objetos en la capa: " + RemainingBricks);
 
         GameObject playerPos = Instantiate(playerPrefab, artTransform);
 
@@ -44,13 +46,14 @@ public class LevelController : MonoBehaviour
     {
         RemainingBricks--;
         CheckWinCondition();
+       // Debug.Log("Remaining bricks: " + RemainingBricks);
     }
 
     private void CheckWinCondition()
     {
         if (RemainingBricks == 0)
         {
-            Debug.Log("¡Has ganado!");
+            // Debug.Log("¡Has ganado!");
             MenuManager.Instance.LevelComplete();
         }
     }
@@ -59,12 +62,12 @@ public class LevelController : MonoBehaviour
     {
         if (BallOutOfBounds())
         {
-            initialBallCount--;
+            InitialBallCount--;
         }
 
-        if (initialBallCount <= 0)
+        if (InitialBallCount <= 0)
         {
-            Debug.Log("¡Has perdido!");
+            // Debug.Log("¡Has perdido!");
             MenuManager.Instance.GameOver();
         }
     }

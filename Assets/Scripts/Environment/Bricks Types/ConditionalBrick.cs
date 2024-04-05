@@ -16,30 +16,22 @@ public class ConditionalBrick : Brick
         KeyController.OnKeyAcquired -= KeyAcquiredHandler;
     }
 
-    private void KeyAcquiredHandler(bool hasKey)
+    private void KeyAcquiredHandler(bool m_hasKey)
     {
-        this.hasKey = hasKey;
-        UpdateBrickState();
+        this.hasKey = m_hasKey;
+        iconSprite.enabled = !hasKey;
 
         if (!hasKey)
         {
             MenuManager.Instance.GameOver();
         }
     }
-
+    
     protected override void DestroyBrick()
     {
         if (hasKey)
         {
             base.DestroyBrick();
-        }
-    }
-
-    private void UpdateBrickState()
-    {
-        if (iconSprite != null)
-        {
-            iconSprite.enabled = !hasKey;
         }
     }
 }

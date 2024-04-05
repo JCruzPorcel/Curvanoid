@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2267696539308635414, guid: db76765fcd2ff3245b990b409b089274, type: 3}
       propertyPath: m_Name
-      value: P_BackToMenu_Button Variant
+      value: P_ButtonBackToMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2358228991585618367, guid: db76765fcd2ff3245b990b409b089274, type: 3}
       propertyPath: m_Pivot.x
@@ -106,11 +106,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3960738183513616234, guid: db76765fcd2ff3245b990b409b089274, type: 3}
       propertyPath: m_fontSize
-      value: 26
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960738183513616234, guid: db76765fcd2ff3245b990b409b089274, type: 3}
+      propertyPath: m_fontStyle
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 3960738183513616234, guid: db76765fcd2ff3245b990b409b089274, type: 3}
       propertyPath: m_fontSizeBase
-      value: 26
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960738183513616234, guid: db76765fcd2ff3245b990b409b089274, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

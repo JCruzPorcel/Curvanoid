@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
         transform.position = bezierCurve.GetPoint(t);
     }
 
-    private void OnEnable()
+  /*  private void OnEnable()
     {
         //controls = GameManager.Instance.Controls;
 
@@ -27,16 +27,16 @@ public class PlayerController : MonoBehaviour
         //controls.Player.Move.canceled += ctx => { direction = 0f; };
 
         //controls.Player.Skill.performed += ctx => StartGame();
-    }
+    }*/
 
-    private void OnDestroy()
+   /* private void OnDestroy()
     {
         //controls.Disable();
 
         //controls.Player.Move.canceled -= ctx => { direction = 0f; };
 
         //controls.Player.Skill.canceled -= ctx => StartGame();
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
             {
                 BallController ballController = FindFirstObjectByType<BallController>();
                 ballController?.StartMoving();
+
+                AudioManager.Instance.PlaySoundOnObject(this.gameObject, SoundName.SFX_StartGame); // AudioManager
 
                 canMove = true;
             }

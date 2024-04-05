@@ -50,6 +50,9 @@ MonoBehaviour:
   winPrefab: {fileID: 2400288358254643476, guid: 9be145288267d6644b4ac6d8dce9e98a, type: 3}
   losePrefab: {fileID: 8630611080702407166, guid: 351660a5bd6a814498136dbd5af67256, type: 3}
   artTransform: {fileID: 0}
+  brickLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &4528594457108326073
 MonoBehaviour:
   m_ObjectHideFlags: 0

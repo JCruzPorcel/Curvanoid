@@ -323,7 +323,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164007688}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -656,17 +656,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 900011'
+  m_text: 'Score: 980011'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3995ef0b8917364d9c11fc3ca044861, type: 2}
+  m_sharedMaterial: {fileID: -262781831583194825, guid: d3995ef0b8917364d9c11fc3ca044861, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282466625
+  m_fontColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -683,13 +683,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 35
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1161,7 +1161,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595239406}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1856,7 +1856,7 @@ Transform:
   m_GameObject: {fileID: 753846262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -1.5, z: 0}
+  m_LocalPosition: {x: 1.5, y: -2.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2596,7 +2596,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071060475}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2897,7 +2897,7 @@ Transform:
   m_GameObject: {fileID: 1124769106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -1, z: 0}
+  m_LocalPosition: {x: 1, y: -2.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3266,7 +3266,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318890527}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3857,6 +3857,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 27a9ad32f8fb9c34da3d9121b7b90ec7, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].name
+      value: '[UI] Save Button'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].name
+      value: '[SFX] Ball Impact'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 75e8b3dedb3549d4491a2be4760d3aa6, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].name
+      value: '[SFX] Destroy Brick'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: caea35fd43dbae4409f15fa20b72dce8, type: 3}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].name
+      value: '[SFX] Start Game'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[11].soundName
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[12].soundName
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[13].soundName
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].soundName
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sounds.Array.data[14].mixergroup
+      value: 
+      objectReference: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
     - target: {fileID: 4404421915134270637, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: m_Name
       value: === MANAGER ===

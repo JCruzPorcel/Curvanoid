@@ -243,4 +243,4 @@ MonoBehaviour:
   hitsRemaining: 1
   useRandomColorOnStart: 0
   ballPrefab: {fileID: 4285201531873152708, guid: d6485e69e18c1754da6ce0befd76289b, type: 3}
-  generatedBallCount: 3
+  iconContainer: {fileID: 7282394334170761980}

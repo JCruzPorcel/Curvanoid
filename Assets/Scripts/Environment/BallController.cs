@@ -1,18 +1,21 @@
 using UnityEngine;
-using static Utils.JCruzPorcel.AudioManager;
+using System.Collections.Generic;
 
 public class BallController : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem shockwave_Prefab; // Prefab del shockwave
     [SerializeField] private float initialSpeed = 10f; // Velocidad inicial de la bola
     [SerializeField] private float maxBurstSpeed = 20f; // Velocidad máxima durante el burst
     [SerializeField] private float burstDuration = 0.5f; // Duración del burst en segundos
     [SerializeField] private float decelerationRate = 5f; // Tasa de disminución de velocidad
-    private Rigidbody2D rb;
-    private bool isMoving = false;
     [SerializeField] private bool isBurstEnabled = true; // Controla si se activa el burst de velocidad
     private float burstEndTime = 0f;
+    private bool isMoving = false;
     private Vector2 savedVelocity; // Guarda la velocidad antes de detener el movimiento
+
     private CircleCollider2D circleCollider;
+    private Rigidbody2D rb;
+    private List<ParticleSystem> shockwavePool = new List<ParticleSystem>(); // Pool de shockwaves
 
     private void OnEnable()
     {
@@ -57,18 +60,32 @@ public class BallController : MonoBehaviour
         if (impactForce > impactThreshold)
         {
             // Reproduce el sonido de impacto solo si el impacto es lo suficientemente fuerte
-            Instance.Play(SoundName.SFX_BallImpact); // Se obtiene desde el Utils.JCruzPorcel.AudioManager
+            AudioManager.Instance.PlaySoundOnObject(this.gameObject, SoundName.SFX_BallImpact); // Se obtiene desde el Utils.JCruzPorcel.AudioManager
 
-            if (collision.gameObject.CompareTag("Brick"))
+            if (collision.gameObject.CompareTag("Brick") || collision.gameObject.CompareTag("SpecialBrick"))
             {
                 collision.gameObject.GetComponent<Brick>().TrackHits();
             }
         }
 
-        // Si la bola golpea al jugador, activa el burst de velocidad
+        // Si la bola golpea al jugador, activa el burst de velocidad y el shockwave
         if (collision.gameObject.CompareTag("Player"))
         {
             burstEndTime = Time.time + burstDuration;
+
+            // Intenta obtener un shockwave inactivo del pool
+            ParticleSystem shockwave = GetInactiveShockwave();
+
+            if (shockwave == null)
+            {
+                // Si no hay shockwave inactivo, instanciar uno nuevo
+                shockwave = Instantiate(shockwave_Prefab, transform.position, Quaternion.identity);
+                shockwavePool.Add(shockwave);
+            }
+
+            shockwave.transform.position = transform.position;
+
+            shockwave.Play();
         }
     }
 
@@ -123,5 +140,17 @@ public class BallController : MonoBehaviour
             isMoving = true;
             savedVelocity = Vector2.zero; // Restablecer la velocidad guardada
         }
+    }
+
+    private ParticleSystem GetInactiveShockwave()
+    {
+        foreach (ParticleSystem shockwave in shockwavePool)
+        {
+            if (!shockwave.isPlaying)
+            {
+                return shockwave;
+            }
+        }
+        return null;
     }
 }

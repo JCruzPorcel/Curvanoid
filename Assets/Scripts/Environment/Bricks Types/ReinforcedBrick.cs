@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ReinforcedBrick : Brick
@@ -10,9 +9,19 @@ public class ReinforcedBrick : Brick
         base.Start();
     }
 
+    protected override void DestroyBrick()
+    {
+        srContainer.enabled = false;
+        base.DestroyBrick();
+    }
+
     public override void TrackHits()
     {
         srContainer.enabled = true;
-        base.TrackHits();
+        hitsRemaining--;
+        if (hitsRemaining <= 0)
+        {
+            DestroyBrick();
+        }
     }
 }

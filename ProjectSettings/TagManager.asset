@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - Brick
   - Interactable
+  - SpecialBrick
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Brick
   - Water
   - UI
-  - Interactable
-  - 
+  - SpecialBrick
+  - Ball
   - 
   - 
   - 

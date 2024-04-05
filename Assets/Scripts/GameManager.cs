@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             currentGameState = newGameState;
             OnGameStateChanged?.Invoke(newGameState);
-            Debug.Log($"Game state changed to: {currentGameState}");
+            //Debug.Log($"Game state changed to: {currentGameState}");
 
             switch (newGameState)
             {
@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
 
         SetGameState(GameState.MainMenu);
         Cursor.lockState = CursorLockMode.None;
-        Utils.JCruzPorcel.AudioManager.Instance.Play(Utils.JCruzPorcel.AudioManager.SoundName.Music_MainMenu);
     }
 
     public void LevelCompletedState()

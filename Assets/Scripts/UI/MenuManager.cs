@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -204,11 +202,15 @@ public class MenuManager : MonoBehaviour
         DesactivateMenu();
         SwitchToScene(sceneName);
         GameManager.Instance.MainMenuState();
+        AudioManager.Instance.Stop(GetMusicLevel());
+        AudioManager.Instance.Play(SoundName.Music_MainMenu);
     }
 
     public void SetCurrentLevel(int newLevel)
     {
         currentLevel = newLevel;
+        AudioManager.Instance.Stop(SoundName.Music_MainMenu);
+        AudioManager.Instance.Play(GetMusicLevel());
     }
 
     public void NextLevel()
@@ -310,7 +312,7 @@ public class MenuManager : MonoBehaviour
         if (instance != null)
             gameOverInstance.SetActive(true);
 
-        gameOverInstance.transform.SetParent(null); 
+        gameOverInstance.transform.SetParent(null);
         GameManager.Instance.GameOverState();
     }
 
@@ -324,7 +326,27 @@ public class MenuManager : MonoBehaviour
             levelCompletInstance.SetActive(true);
 
         levelCompletInstance.transform.SetParent(null);
-       GameManager.Instance.LevelCompletedState();
+        GameManager.Instance.LevelCompletedState();
+    }
+
+    public SoundName GetMusicLevel()
+    {
+        switch (currentLevel)
+        {
+            case 0:
+                return SoundName.Music_Level_0;
+            case 1:
+                return SoundName.Music_Level_1;
+
+            case 2:
+                return SoundName.Music_Level_2;
+
+            case 3:
+                return SoundName.Music_Level_3;
+
+            default:
+                return SoundName.Music_MainMenu;
+        }
     }
 
     public void QuitGame()
