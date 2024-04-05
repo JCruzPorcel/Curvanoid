@@ -33,6 +33,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Sound[] sounds;
     private Dictionary<SoundName, AudioSource> audioSources = new Dictionary<SoundName, AudioSource>();
 
+    [SerializeField] private AudioMixerGroup sfxMixerGroup;
+    [SerializeField] private AudioMixerGroup musicMixerGroup;
+
+    private const string SFXVolumeKey = "SFXVolume";
+    private const string MusicVolumeKey = "MusicVolume";
+
     private void Awake()
     {
         if (Instance == null)
@@ -58,7 +64,27 @@ public class AudioManager : MonoBehaviour
 
             if (sound.playOnAwake)
                 Play(sound.soundName);
+        }
+    }
 
+    private void Start()
+    {
+        LoadVolume();
+    }
+
+    private void LoadVolume()
+    {
+        LoadVolume(SFXVolumeKey, sfxMixerGroup);
+        LoadVolume(MusicVolumeKey, musicMixerGroup);
+    }
+
+    private void LoadVolume(string volumeKey, AudioMixerGroup mixerGroup)
+    {
+        if (PlayerPrefs.HasKey(volumeKey))
+        {
+            float volume = PlayerPrefs.GetFloat(volumeKey);
+            float adjustedVolume = Mathf.Log10(volume) * 20;
+            mixerGroup.audioMixer.SetFloat(volumeKey, adjustedVolume);
         }
     }
 
@@ -80,7 +106,6 @@ public class AudioManager : MonoBehaviour
     {
         if (audioSources.ContainsKey(soundName))
             audioSources[soundName].Stop();
-
     }
 
     public void PlaySoundOnObject(GameObject obj, SoundName soundName)

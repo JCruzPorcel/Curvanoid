@@ -666,6 +666,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: sfxMixerGroup
+      value: 
+      objectReference: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
+      propertyPath: musicMixerGroup
+      value: 
+      objectReference: {fileID: -5838650390691002514, guid: db01d385db19961498edab8373955bbe, type: 2}
+    - target: {fileID: 2979999130941252108, guid: a965fb6c7af28c94db458b88bfe4b081, type: 3}
       propertyPath: sounds.Array.size
       value: 15
       objectReference: {fileID: 0}

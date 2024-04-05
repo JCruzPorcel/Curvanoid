@@ -7,36 +7,64 @@ public class PlayerController : MonoBehaviour
     private float direction;
     private float t = 0.5f; // Inicia en el punto medio de la curva
     private bool canMove = false;
+    private PlayerInput playerInput;
 
     private BezierCurve bezierCurve;
     // private GameControls controls;
 
     private void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         bezierCurve = FindFirstObjectByType<BezierCurve>();
         transform.position = bezierCurve.GetPoint(t);
+
+        GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
 
-  /*  private void OnEnable()
+    private void OnEnable()
     {
-        //controls = GameManager.Instance.Controls;
+        playerInput = GetComponent<PlayerInput>();
+    }
 
-        //controls.Enable();
-
-        //controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
-        //controls.Player.Move.canceled += ctx => { direction = 0f; };
-
-        //controls.Player.Skill.performed += ctx => StartGame();
-    }*/
-
-   /* private void OnDestroy()
+    private void HandleGameStateChanged(GameManager.GameState newGameState)
     {
-        //controls.Disable();
+        if (newGameState == GameManager.GameState.Options)
+        {
+            direction = 0f;
+            if (playerInput != null)
+            { 
+                playerInput.enabled = false;
+            }
+        }
+        else if (newGameState == GameManager.GameState.InGame)
+        {
+            if (playerInput != null)
+            {
+                playerInput.enabled = true;
+            }
+        }
+    }
 
-        //controls.Player.Move.canceled -= ctx => { direction = 0f; };
+    /*  private void OnEnable()
+      {
+          //controls = GameManager.Instance.Controls;
 
-        //controls.Player.Skill.canceled -= ctx => StartGame();
-    }*/
+          //controls.Enable();
+
+          //controls.Player.Move.performed += ctx => { direction = ctx.ReadValue<float>(); };
+          //controls.Player.Move.canceled += ctx => { direction = 0f; };
+
+          //controls.Player.Skill.performed += ctx => StartGame();
+      }*/
+
+    /* private void OnDestroy()
+     {
+         //controls.Disable();
+
+         //controls.Player.Move.canceled -= ctx => { direction = 0f; };
+
+         //controls.Player.Skill.canceled -= ctx => StartGame();
+     }*/
 
     private void FixedUpdate()
     {

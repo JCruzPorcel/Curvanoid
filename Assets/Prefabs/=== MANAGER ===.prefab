@@ -112,7 +112,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     playOnAwake: 0
-    queueSize: 1
   - name: '[Music] Level 0'
     soundName: 2
     clip: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
@@ -121,7 +120,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     playOnAwake: 0
-    queueSize: 1
   - name: '[Music] Level 1'
     soundName: 3
     clip: {fileID: 8300000, guid: 7ea46a95dac05cb4088fe31f8a94e20f, type: 3}
@@ -130,7 +128,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     playOnAwake: 0
-    queueSize: 1
   - name: '[Music] Level 2'
     soundName: 4
     clip: {fileID: 8300000, guid: 5abfe73168e1b8b438fe3d3a3bdefc42, type: 3}
@@ -139,7 +136,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     playOnAwake: 0
-    queueSize: 1
   - name: '[Music] Level 3'
     soundName: 5
     clip: {fileID: 8300000, guid: 5abfe73168e1b8b438fe3d3a3bdefc42, type: 3}
@@ -148,7 +144,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     playOnAwake: 0
-    queueSize: 1
   - name: '[UI] Hover'
     soundName: 6
     clip: {fileID: 8300000, guid: dc59970cf10ea6349920130728c2ddf4, type: 3}
@@ -157,7 +152,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 20
   - name: '[UI] Click'
     soundName: 8
     clip: {fileID: 8300000, guid: 19bcb0e7feff7634b9498804e45afa2f, type: 3}
@@ -166,7 +160,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 1
   - name: '[UI] Click Back Button'
     soundName: 10
     clip: {fileID: 8300000, guid: bfb138370ddfe48428739b668a3fda7a, type: 3}
@@ -175,7 +168,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 1
   - name: '[UI] Click Exit Button'
     soundName: 11
     clip: {fileID: 8300000, guid: 92675b266ebe3a54d881da15d4eeeb1f, type: 3}
@@ -184,7 +176,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 1
   - name: '[UI] Hover Level Button'
     soundName: 7
     clip: {fileID: 8300000, guid: dd280b78b8eb6cb4f8b0919d4925dfb4, type: 3}
@@ -193,7 +184,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 20
   - name: '[UI] Click Level Button'
     soundName: 9
     clip: {fileID: 8300000, guid: d2df460a6fbfe5f4581c6f74961b4710, type: 3}
@@ -202,25 +192,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 1
-  - name: '[SFX] Ball Impact'
-    soundName: 14
-    clip: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
-    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    queueSize: 10
-  - name: '[SFX] Destroy Brick'
-    soundName: 15
-    clip: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
-    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    queueSize: 10
   - name: '[UI] Save Button'
     soundName: 13
     clip: {fileID: 8300000, guid: 27a9ad32f8fb9c34da3d9121b7b90ec7, type: 3}
@@ -229,7 +200,30 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
-    queueSize: 1
+  - name: '[SFX] Ball Impact'
+    soundName: 14
+    clip: {fileID: 8300000, guid: f0d2999fbfe1fe046af1ac50e9ee9fcb, type: 3}
+    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+  - name: '[SFX] Destroy Brick'
+    soundName: 15
+    clip: {fileID: 8300000, guid: 75e8b3dedb3549d4491a2be4760d3aa6, type: 3}
+    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+  - name: '[SFX] Start Game'
+    soundName: 17
+    clip: {fileID: 8300000, guid: caea35fd43dbae4409f15fa20b72dce8, type: 3}
+    mixergroup: {fileID: -8524134607484857369, guid: db01d385db19961498edab8373955bbe, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
 --- !u!1 &4404421915134270637
 GameObject:
   m_ObjectHideFlags: 0
