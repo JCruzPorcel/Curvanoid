@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Brick : MonoBehaviour
 {
-    public delegate void OnBrickDestroyedDelegate();
+    public delegate void OnBrickDestroyedDelegate(GameObject brick);
     public static event OnBrickDestroyedDelegate OnBrickDestroyed;
 
     [SerializeField] protected int scoreAmount = 10;
@@ -14,9 +14,11 @@ public abstract class Brick : MonoBehaviour
     public virtual void TrackHits()
     {
         hitsRemaining--;
+
         if (hitsRemaining <= 0)
         {
             DestroyBrick();
+            hitsRemaining = 0;
         }
     }
 
@@ -31,7 +33,7 @@ public abstract class Brick : MonoBehaviour
         ScoreController scoreController = FindFirstObjectByType<ScoreController>();
         scoreController.AddScore(scoreAmount);
 
-        OnBrickDestroyed?.Invoke();
+        OnBrickDestroyed?.Invoke(this.gameObject);
     }
 
     protected virtual void Start()

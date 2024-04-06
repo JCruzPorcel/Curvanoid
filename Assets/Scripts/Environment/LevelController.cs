@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -8,30 +9,36 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject winPrefab;
     [SerializeField] private GameObject losePrefab;
     [Space(10)]
-    // Para que este mas ordenada la jerarquia al momento de testear
-    [SerializeField, Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")] private Transform artTransform; 
+    [SerializeField, Tooltip("Transform del GameObject ART para guardar la instancia del Jugador")]
+    private Transform artTransform;
     private Transform ballPosition;
 
+    // Lista para almacenar todos los bricks
+    private List<GameObject> bricks = new List<GameObject>();
+
     public int InitialBallCount { get; set; } = 1;
-
     public int RemainingBricks { get; set; }
-
 
     private void Start()
     {
-        Brick.OnBrickDestroyed += HandleBrickDestroyed;
+        Brick.OnBrickDestroyed += RemoveBrickFromList;
 
-        RemainingBricks = FindObjectsOfType<Brick>().Length;
-        // Debug.Log("Cantidad de objetos en la capa: " + RemainingBricks);
+        // Buscar todos los bricks y agregarlos a la lista
+        GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
+        foreach (GameObject brick in brickObjects)
+        {
+            bricks.Add(brick);
+        }
+
+        RemainingBricks = bricks.Count;
 
         GameObject playerPos = Instantiate(playerPrefab, artTransform);
-
         ballPosition = Instantiate(ballPrefab, playerPos.transform).transform; // Creamos y obtenemos el transform de Ball
     }
 
     private void OnDisable()
     {
-        Brick.OnBrickDestroyed -= HandleBrickDestroyed;
+        Brick.OnBrickDestroyed -= RemoveBrickFromList;
     }
 
     private void Update()
@@ -44,9 +51,15 @@ public class LevelController : MonoBehaviour
 
     private void HandleBrickDestroyed()
     {
-        RemainingBricks--;
         CheckWinCondition();
-       // Debug.Log("Remaining bricks: " + RemainingBricks);
+        Debug.Log("Remaining bricks: " + RemainingBricks);
+    }
+
+    private void RemoveBrickFromList(GameObject brick)
+    {
+        bricks.Remove(brick);
+        RemainingBricks = bricks.Count;
+        HandleBrickDestroyed();
     }
 
     private void CheckWinCondition()

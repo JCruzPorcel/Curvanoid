@@ -7,7 +7,7 @@ public class KeyController : MonoBehaviour
 
     [SerializeField] private float fallSpeed = 2f;
 
-    public bool isFalling = false;
+    private bool isFalling = false;
 
     private LevelController levelController;
 

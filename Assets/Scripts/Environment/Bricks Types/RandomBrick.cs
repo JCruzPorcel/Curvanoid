@@ -31,8 +31,13 @@ public class RandomBrick : MonoBehaviour
 
         for (int i = 0; i < generatedBallCount; i++)
         {
-            GameObject ballInstance = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-
+            // Calcula un ángulo aleatorio entre -45 y 45 grados
+            float angle = Random.Range(-45f, 45f);
+            // Crea un cuaternión que representa una rotación sobre el eje Z
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            // Instancia la bola con la rotación inicial ajustada
+            GameObject ballInstance = Instantiate(ballPrefab, transform.position, rotation);
+            // Inicia el movimiento de la bola
             ballInstance.GetComponent<BallController>().StartMoving();
         }
     }

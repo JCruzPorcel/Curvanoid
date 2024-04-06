@@ -101,10 +101,12 @@ public class MenuManager : MonoBehaviour
 
             Canvas[] canvasArray = FindObjectsOfType<Canvas>();
 
-            // Buscar el primer Canvas que no sea un descendiente del objeto actual
-            Canvas canvas = Array.Find(canvasArray, c => c.gameObject != gameObject && !IsDescendantOf(c.gameObject, gameObject));
+            // Buscar el primer Canvas que no sea un descendiente del objeto actual y sea de tipo Overlay
+            Canvas canvas = Array.Find(canvasArray, c => c.gameObject != gameObject
+                                                 && !IsDescendantOf(c.gameObject, gameObject)
+                                                 && c.renderMode == RenderMode.ScreenSpaceOverlay);
 
-            // Si no se encontró un canvas que no sea un descendiente, crear uno nuevo
+            // Si no se encontró un canvas que no sea un descendiente y sea de tipo Overlay, crear uno nuevo
             if (canvas == null)
             {
                 GameObject canvasGO = new GameObject(canvasName);
