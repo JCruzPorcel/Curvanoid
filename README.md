@@ -24,3 +24,7 @@
 ### **Proyecto Original con Diseños Propios**
 
 El prototipo ha logrado cumplir con los objetivos principales y secundarios establecidos, ofreciendo una experiencia de juego completa y satisfactoria.
+
+
+Link de Itch.io: ---
+Alternativa: https://www.mediafire.com/file/bz1b19rwklxm31l/Curvanoid.zip/file
