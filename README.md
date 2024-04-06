@@ -8,11 +8,11 @@
 - **Sistema de Trails:** Se ha utilizado un sistema de trails para agregar efectos visuales dinámicos.
 
 ### Gestión del Juego:
-- **GameManager:** Se ha desarrollado un GameManager para controlar los estados del juego, garantizando una transición suave entre ellos.
+- **GameManager:** Se ha desarrollado un GameManager para controlar los estados del juego.
 - **MenuManager:** Se ha integrado un MenuManager para gestionar los menús del juego, con transiciones suaves y opciones básicas como ajuste de volumen y remapeo de teclas en tiempo real.
 
 ### Sonido:
-- **AudioManager:** Se ha creado un AudioManager para gestionar los sonidos del juego, garantizando una experiencia auditiva completa.
+- **AudioManager:** Se ha creado un AudioManager para gestionar los sonidos del juego, garantizando una experiencia de inmerción completa.
 
 ### Sistema de Puntuación:
 - **Sistema de Puntuaciones:** Se ha implementado un sistema de puntuaciones que muestra la posición, el nombre y el score de los jugadores, resaltando los 3 mejores y la posición actual del jugador.
