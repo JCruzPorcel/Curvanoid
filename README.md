@@ -1,6 +1,6 @@
 # **Proyecto Completo #200**
 
-**Se ha completado el objetivo principal y los objetivos secundarios adicionales:**
+## Se ha completado el objetivo principal y los objetivos secundarios adicionales:
 
 ### Gráficos y Estética:
 - **Fondo en Degradado:** Se ha creado un fondo utilizando shaders para generar un efecto visual llamativo.
@@ -23,7 +23,7 @@
 
 ### **Proyecto Original con Diseños Propios**
 
-El prototipo ha logrado cumplir con los objetivos principales y secundarios establecidos, ofreciendo una experiencia de juego completa y satisfactoria.
+**El prototipo ha logrado cumplir con los objetivos principales y secundarios establecidos, ofreciendo una experiencia de juego completa y satisfactoria.**
 
 
 Link de Itch.io: ---
