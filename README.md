@@ -21,10 +21,14 @@
 ### Movimiento del Jugador:
 - **Movimiento Suave:** Se ha implementado un movimiento del jugador utilizando curvas de Bézier, permitiendo un movimiento suave y natural a través del juego.
 
-### **Proyecto Original con Diseños Propios**
+### Nomenclatura Utilizada:
+- **Se ha adoptado una convención de nomenclatura para mejorar la legibilidad y comprensión del código.**
+- *S_* **: Utilizado para nombres de sprites.**
+- *AClip_* **: Utilizado para nombres de animaciones de clip.**
+- *AController_* **: Utilizado para nombres de controladores de animación, entre otros.**
+### **Proyecto Original con Diseños Propios***
 
 **El prototipo ha logrado cumplir con los objetivos principales y secundarios establecidos, ofreciendo una experiencia de juego completa y satisfactoria.**
-
 
 Link de Itch.io: ---
 Alternativa: https://www.mediafire.com/file/bz1b19rwklxm31l/Curvanoid.zip/file
